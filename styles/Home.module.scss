@@ -1,5 +1,6 @@
 .container {
   padding: 0 2rem;
+  background-color: violet;
 }
 
 .main {
@@ -19,6 +20,7 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  border: 4px solid red;
 }
 
 .footer a {
