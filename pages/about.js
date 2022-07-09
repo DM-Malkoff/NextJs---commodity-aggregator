@@ -1,8 +1,12 @@
+import MainLayout from "../components/layouts/MainLayout";
+
 const AboutPage = () => {
     return (
-        <div>
-            <h1>О нас</h1>
-        </div>
+        <>
+            <MainLayout caption="О нас">
+                текст
+            </MainLayout>
+        </>
     )
 }
 export default AboutPage;

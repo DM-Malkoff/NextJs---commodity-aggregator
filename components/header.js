@@ -8,7 +8,9 @@ const Header = () => {
                     <div className='site__header__top__in'>
                         <div className='site__header__top'>
                             <div className='header__top__left'>
-                                <span className="folders__popup__btn burger__block__btn">Каталог</span>
+                                <span className="folders__popup__btn burger__block__btn">
+                                    <Link href="/catalog"><a>Каталог</a></Link>
+                                </span>
                             </div>
                             <div className='header__top__center'>
                                 <ul className="menu-default top__menu">
@@ -31,10 +33,7 @@ const Header = () => {
                 </div>
             </div>
         </header>
-
-
     )
 }
 
 export default Header;
-

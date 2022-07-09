@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from 'next/image';
 import Router, {useRouter} from "next/router";
 import Link from "next/link";
+import store from "../../redux/store";
 
 import {getProductsData} from "../../utils/products";
 import Header from "../../components/header";
@@ -9,9 +10,10 @@ import Footer from "../../components/footer";
 import BreadCrumbs from "../../components/breadcrumbs";
 import Caption from "../../components/caption";
 import Filter from "../../components/filter";
+import SearchBlock from "../../components/searchBlock";
 
 const Diski = ({products}) =>{
-    console.log('awd',products);
+    console.log('awd',store);
     const pathLocation = useRouter().pathname
     function goToOuterTransition(link, data){
         localStorage.setItem('external-link',link)
@@ -32,6 +34,7 @@ const Diski = ({products}) =>{
             </Head>
             <Header />
             <div className='site__container'>
+                <SearchBlock />
                 <div className='site__main__wrap folder'>
                     <main role="main" className="site__main folder">
                         <div className="site__main__in">
@@ -79,7 +82,7 @@ const Diski = ({products}) =>{
                                                                     </div>
                                                                     <div className="product-compare">
                                                                         <label>
-                                                                            <input type="checkbox" value="377717861" />
+                                                                            <input type="checkbox" />
                                                                             Добавить к сравнению
                                                                         </label>
                                                                     </div>

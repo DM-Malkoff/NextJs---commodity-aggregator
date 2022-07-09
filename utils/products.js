@@ -1,7 +1,7 @@
 import api from "../api";
 
-export const getProductsData = async ( ) => {
+export const getProductsData = async (categoryId) => {
     return await api.get(
-        'products?filter[limit] =-1'
+        `products?category=${categoryId}`
     );
 };

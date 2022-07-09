@@ -1,102 +1,91 @@
 export default function Filter(){
+    if (process.browser) {
+        const filterItem = document.getElementsByClassName('shop_filter_field')
+        const filterGroupName = document.getElementsByClassName('filter_field_title')
+        const filterBlock = document.getElementsByClassName('filter_field_body')
+        for (let itemIndex=0; itemIndex < filterItem.length; itemIndex++){
+            filterGroupName[itemIndex].addEventListener('click', function (){
+                filterItem[itemIndex].classList.toggle('active')
+                filterBlock[itemIndex].style.height = filterItem[itemIndex].classList.contains('active') ? filterBlock[itemIndex].scrollHeight + 'px' : 0
+            })
+        }
+        const filterOption = document.getElementsByClassName('param_val')
+        for (let optionIndex = 0;optionIndex < filterOption.length; optionIndex++){
+            filterOption[optionIndex].addEventListener('click',function (){
+                filterOption[optionIndex].classList.toggle('active-val')
+            })
+        }
+    }
+
     return(
         <div className="mode_folder_filter">
             <div className="filter_block_wrapper">
                 <div className="filter_block_wrap">
-                    <div className="filter_block_close">Закрыть</div>
                     <div className="filter_block_title">Фильтр</div>
-                    {/*marginRight: spacing */}
                     <form action="#" className="shop2-filter">
                         <div className="table-filter-param">
                             <div className="shop_filter_field">
-                                <div className="filter_field_title active">Цена: (руб.)</div>
+                                <div className="filter_field_title">Цена: (руб.)</div>
                                 <div className="filter_field_body range">
                                     <div className="input_from">
-                                        <input placeholder="от" className="shop2-input-float"
-                                               type="text" value="" name="s[price][min]" />
+                                        <input placeholder="от" className="shop2-input-float" type="text" name="s[price][min]" />
                                     </div>
                                     <div className="input_to">
-                                        <input placeholder="до" className="shop2-input-float"
-                                               type="text" value="" name="s[price][max]" />
+                                        <input placeholder="до" type="text" />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="shop_filter_field">
-                                <div className="filter_field_title active">Производитель:</div>
+                                <div className="filter_field_title">Производитель:</div>
                                 <div className="filter_field_body">
-                                    <a href="#" data-name="s[vendor_id][]" data-value="34198661"
-                                       className="param_val">
-                                        Производитель №12<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[vendor_id][]" data-value="33889861"
-                                       className="param_val">
-                                        Производитель №2<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[vendor_id][]" data-value="34144461"
-                                       className="param_val">
-                                        Производитель №3<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[vendor_id][]" data-value="34144661"
-                                       className="param_val">
-                                        Производитель №5<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[vendor_id][]" data-value="34198461"
-                                       className="param_val">
-                                        Производитель №7<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[vendor_id][]" data-value="34198261"
-                                       className="param_val">
-                                        Производитель №8<span>&nbsp;</span>
-                                    </a>
+                                    <span data-name="s[vendor_id][]" data-value="34198661" className="param_val">
+                                        Производитель №12
+                                    </span>
+                                    <span data-name="s[vendor_id][]" data-value="33889861" className="param_val">
+                                        Производитель №2
+                                    </span>
+                                    <span data-name="s[vendor_id][]" data-value="34144461" className="param_val">
+                                        Производитель №3
+                                    </span>
+                                    <span data-name="s[vendor_id][]" data-value="34144661" className="param_val">
+                                        Производитель №5
+                                    </span>
+                                    <span data-name="s[vendor_id][]" data-value="34198461" className="param_val">
+                                        Производитель №7
+                                    </span>
+                                    <span data-name="s[vendor_id][]" data-value="34198261" className="param_val">
+                                        Производитель №8
+                                    </span>
                                 </div>
                             </div>
 
                             <div className="shop_filter_field shop2-filter-fields type-select">
-                                <div className="filter_field_title active">Сезон:</div>
+                                <div className="filter_field_title">Сезон:</div>
                                 <div className="filter_field_body">
-                                    <a href="#" data-name="s[sezon][]" data-value="55797061"
-                                       className="param_val">Любой<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[sezon][]" data-value="55797261"
-                                       className="param_val">Всесезонные<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[sezon][]" data-value="55797461"
-                                       className="param_val">Лето<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[sezon][]" data-value="55797661"
-                                       className="param_val">Зима<span>&nbsp;</span></a>
+                                    <span data-name="s[sezon][]" data-value="55797061" className="param_val">Любой</span>
+                                    <span data-name="s[sezon][]" data-value="55797261" className="param_val">Всесезонные</span>
+                                    <span data-name="s[sezon][]" data-value="55797461" className="param_val">Лето</span>
+                                    <span data-name="s[sezon][]" data-value="55797661" className="param_val">Зима</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Тип автомобиля:</div>
-                                <div className="filter_field_body"><a
-                                    href="#" data-name="s[tip_avtomobila][]"
-                                    data-value="55800861"
-                                    className="param_val">Легковой<span>&nbsp;</span></a><a
-                                    href="#" data-name="s[tip_avtomobila][]"
-                                    data-value="56532661"
-                                    className="param_val">Легкогрузовой<span>&nbsp;</span></a><a
-                                    href="#" data-name="s[tip_avtomobila][]"
-                                    data-value="56533861"
-                                    className="param_val">Внедорожник<span>&nbsp;</span></a><a
-                                    href="#" data-name="s[tip_avtomobila][]"
-                                    data-value="56535061"
-                                    className="param_val">Кроссовер<span>&nbsp;</span></a>
+                                <div className="filter_field_body">
+                                    <span data-name="s[tip_avtomobila][]" data-value="55800861" className="param_val">Легковой</span>
+                                    <span data-name="s[tip_avtomobila][]" data-value="56532661" className="param_val">Легкогрузовой</span>
+                                    <span data-name="s[tip_avtomobila][]" data-value="56533861" className="param_val">Внедорожник</span>
+                                    <span data-name="s[tip_avtomobila][]" data-value="56535061" className="param_val">Кроссовер</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Диаметр:</div>
                                 <div className="filter_field_body">
-                                    <a href="#" data-name="s[diametr][]" data-value="55798261"
-                                       className="param_val">14"<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[diametr][]" data-value="56329861"
-                                       className="param_val">16"<span>&nbsp;</span>
-                                    </a>
-                                    <a href="#" data-name="s[diametr][]" data-value="56535661"
-                                       className="param_val">17"<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[diametr][]" data-value="56534261"
-                                       className="param_val">18"<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[diametr][]" data-value="55801261"
-                                       className="param_val">19"<span>&nbsp;</span></a>
+                                    <span data-name="s[diametr][]" data-value="55798261" className="param_val">14"</span>
+                                    <span data-name="s[diametr][]" data-value="56329861" className="param_val">16" </span>
+                                    <span data-name="s[diametr][]" data-value="56535661" className="param_val">17"</span>
+                                    <span data-name="s[diametr][]" data-value="56534261" className="param_val">18"</span>
+                                    <span data-name="s[diametr][]" data-value="55801261" className="param_val">19"</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
@@ -148,38 +137,27 @@ export default function Filter(){
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Высота профиля:</div>
-                                <div className="filter_field_body"><a
-                                    href="#" data-name="s[vysota_profila][]"
-                                    data-value="55799861"
-                                    className="param_val">35%<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[vysota_profila][]" data-value="56535461"
-                                       className="param_val">50%<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[vysota_profila][]" data-value="56330261"
-                                       className="param_val">60%<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[vysota_profila][]" data-value="56328861"
-                                       className="param_val">65%<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[vysota_profila][]" data-value="56533061"
-                                       className="param_val">70%<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[vysota_profila][]" data-value="56533461"
-                                       className="param_val">75%<span>&nbsp;</span></a>
+                                <div className="filter_field_body">
+                                    <span data-name="s[vysota_profila][]" className="param_val">35%</span>
+                                    <span data-name="s[vysota_profila][]" className="param_val">50%</span>
+                                    <span data-name="s[vysota_profila][]" className="param_val">60%</span>
+                                    <span data-name="s[vysota_profila][]" className="param_val">65%</span>
+                                    <span data-name="s[vysota_profila][]" className="param_val">70%</span>
+                                    <span data-name="s[vysota_profila][]" className="param_val">75%</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Run Flat:</div>
                                 <div className="filter_field_body">
-                                    <a href="#" data-name="s[run_flat][]" data-value="55800061"
-                                       className="param_val">Да<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[run_flat][]" data-value="55800261"
-                                       className="param_val">Нет<span>&nbsp;</span></a>
+                                    <span href="#" data-name="s[run_flat][]" className="param_val">Да</span>
+                                    <span href="#" data-name="s[run_flat][]" className="param_val">Нет</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Шипы:</div>
                                 <div className="filter_field_body">
-                                    <a href="#" data-name="s[sipy][]" data-value="55800461"
-                                       className="param_val">Да<span>&nbsp;</span></a>
-                                    <a href="#" data-name="s[sipy][]" data-value="55800661"
-                                       className="param_val">Нет<span>&nbsp;</span></a>
+                                    <span href="#" data-name="s[sipy][]" className="param_val">Да</span>
+                                    <span href="#" data-name="s[sipy][]" className="param_val">Нет</span>
                                 </div>
                             </div>
 
