@@ -1,5 +1,5 @@
-import Header from '../header'
-import Footer from '../footer'
+import Header from './header'
+import Footer from './footer'
 import Link from "next/link";
 import Filter from "../filter";
 import BreadCrumbs from "../breadcrumbs";

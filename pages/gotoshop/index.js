@@ -1,25 +1,19 @@
-import {useEffect, useState} from "react";
-import Router from "next/router";
+import {useEffect} from "react";
 
-const goToShop = () => {
+const goToShop = ({prevUrl}) => {
+    console.log(prevUrl)
+    const shopName = localStorage.getItem('shopName')
 
-    const [shopName, setShopName] = useState('')
     useEffect(() => {
-        let sName = localStorage.getItem('shopName')
-        setShopName(sName)
+        setTimeout(() => {
+            window.location.assign(localStorage.getItem('external-link'))
+            window.history.replaceState(null, null, prevUrl);
+        }, 2000)
     }, [])
-    const [shopUrl, setShopUrl] = useState('')
-    useEffect(() => {
-        let shopURL = localStorage.getItem('external-link')
-        setShopUrl(shopURL)
-        setTimeout(() => {Router.push(shopURL)}, 3000)
-    }, [])
-
 
     return (
         <div className='transition-text'>
             <div className='loader'>
-
                 <div className="container">
                     <div className="box1"></div>
                     <div className="box2"></div>
@@ -423,3 +417,11 @@ const goToShop = () => {
     );
 };
 export default goToShop;
+
+export async function getServerSideProps(context){
+    return {
+        props: {
+            prevUrl: context.req.headers.referer
+        }
+    };
+}

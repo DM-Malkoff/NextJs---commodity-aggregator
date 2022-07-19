@@ -1,6 +1,6 @@
 import {getCategories} from "../../utils/categories";
 import SearchBlock from "../../components/searchBlock";
-import Header from "../../components/header";
+import Header from "../../components/layouts/header";
 import Caption from "../../components/caption";
 import BreadCrumbs from "../../components/breadcrumbs";
 import {useRouter} from "next/router";
