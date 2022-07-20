@@ -9,12 +9,14 @@ import Caption from "../../components/caption";
 import Filter from "../../components/filter";
 import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
-import Pagenav from "../../components/pagenav";
+import Pagination from "../../components/pagination";
 
 const Slug = ({products,categories,currentCategoryId}) => {
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     console.log('products from cat >', products)
+    console.log('category info >', categories)
     const pathLocation = useRouter().asPath
+    const currentPage = useRouter().query.page
     return (
         <>
             <Head>
@@ -33,7 +35,12 @@ const Slug = ({products,categories,currentCategoryId}) => {
                                 <div className="mode_folder_body">
                                     <Sort />
                                     <ProductList products={products} />
-                                    <Pagenav />
+                                    <Pagination
+                                        totalQuantityProducts={currentCategory.count}
+                                        currentCategory={currentCategory.slug}
+                                        currentCategoryId={currentCategoryId}
+                                        currentPage={currentPage}
+                                    />
                                 </div>
                             </div>
                         </div>

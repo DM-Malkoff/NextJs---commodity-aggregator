@@ -7,7 +7,7 @@ const Sort = () => {
     const sortHandler = () => {
         setSortCLick(!sortClick)
     }
-    console.log(sortClick)
+
     return (
         <div className={styles.shop_sorting_panel}>
             <div className={styles.sort_bl_wr}>

@@ -1416,6 +1416,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
       height: 40px;
       display: block;
       color: #fd9844;
+      border-bottom: 2px solid #fd9844;
     }
     li.page-num a {
       width: 33px;
@@ -1423,6 +1424,11 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
       display: block;
       color: #2c262a;
       text-decoration: none;
+      transition: .2s;
+      &:hover{
+        color: #fd9844;
+
+      }
     }
     li.page-next {
       width: 73px;
@@ -1448,7 +1454,14 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
         }
       }
     }
-
+    li.not_active a {
+      background: none;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px #dfdfdf;
+      &:before {
+        background: url("data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20baseProfile%3D%22full%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20xmlns%3Aev%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2Fxml-events%22%20xml%3Aspace%3D%22preserve%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%227px%22%20height%3D%2214px%22%20%20viewBox%3D%220%200%207%2014%22%20preserveAspectRatio%3D%22none%22%20shape-rendering%3D%22geometricPrecision%22%3E%3Cpath%20fill%3D%22%23dfdfdf%22%20d%3D%22M7.000%2C14.000%20L0.000%2C7.000%20L7.000%2C-0.000%20L7.000%2C14.000%20Z%22%2F%3E%3C%2Fsvg%3E") 50% no-repeat;
+      }
+    }
   }
   .shop_pagelist {
     font-size: 0;

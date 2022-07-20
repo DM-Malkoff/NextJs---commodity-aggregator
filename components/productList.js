@@ -5,9 +5,7 @@ import GoToPartner from "./goToPartner";
 import ProductCard from "./productCard";
 
 const ProductList = ({products}) => {
-    console.log("products > ",products)
-
-    function goToOuterTransition(link, data){
+        function goToOuterTransition(link, data){
         localStorage.setItem('external-link',link)
         const shopName = data.find(item => item.key == 'Магазин')
         localStorage.setItem('shopName', shopName.value)
