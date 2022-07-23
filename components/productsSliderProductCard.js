@@ -1,11 +1,13 @@
 import ProductCard from "./productCard";
 import {useEffect, useState} from "react";
+import {visibleSliderProducts} from "../constants/config";
 
 const ProductsSliderProductCard = ({relatedProducts}) => {
 
     const [indexEl, setSliderProductIndex] = useState(0)
-    const visibleProduct = 4
+    const visibleProducts = visibleSliderProducts
     const [blockWidth, setBlockWidth] = useState(0)
+    const [marginItem, setMarginItem] = useState(0)
 
     useEffect(() => {
         let productBlockWidth = Array.from(document.getElementsByClassName('shop2_product_item'))
@@ -15,10 +17,12 @@ const ProductsSliderProductCard = ({relatedProducts}) => {
 
     function handleArrow(direction){
         if (direction === 'left'){
-            setSliderProductIndex(indexEl !== 0 ? indexEl - 1 : relatedProducts.length-visibleProduct)
+            setSliderProductIndex(indexEl !== 0 ? indexEl - 1 : relatedProducts.length-visibleProducts)
+            setMarginItem(30)
         }
         if (direction === 'right') {
-            setSliderProductIndex(indexEl !== relatedProducts.length-visibleProduct ? indexEl + 1 : 0)
+            setSliderProductIndex(indexEl !== relatedProducts.length-visibleProducts ? indexEl + 1 : 0)
+            setMarginItem(30)
         }
     }
 
@@ -31,12 +35,11 @@ const ProductsSliderProductCard = ({relatedProducts}) => {
                 <div
                     id='relatedProductsSlider'
                     className="slick-track"
-                    style={{transform:`translateX(-${blockWidth*indexEl}px)`, width: `${relatedProducts.length*blockWidth+20*relatedProducts.length}px`}}
-
+                    style={{transform:`translateX(-${(blockWidth+marginItem)*indexEl}px)`, width: `${(relatedProducts.length*blockWidth)+(30*relatedProducts.length)}px`}}
                 >
-                    {relatedProducts.map((item,index) => {
+                    {relatedProducts.map((item) => {
                         return(
-                            <ProductCard key={item.id} productData={item} indexEl={indexEl}/>
+                            <ProductCard key={item.id} productData={item}/>
                         )
 
                     })}

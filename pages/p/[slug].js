@@ -9,11 +9,12 @@ import {getProductData} from "../../utils/product";
 import GoToPartner from "../../components/goToPartner";
 import ProductCard from "../../components/productCard";
 import ProductsSliderProductCard from "../../components/productsSliderProductCard";
+import Link from "next/link";
 
-export default function ProductPage({product, upsellProducts,crossSellProducts}) {
-    console.log('product > ',product)
-    console.log('upsellProducts > ',upsellProducts)
-    console.log('crossSellProducts > ',crossSellProducts)
+export default function ProductPage({product, upsellProducts, crossSellProducts}) {
+    console.log('product > ', product)
+    console.log('upsellProducts > ', upsellProducts)
+    console.log('crossSellProducts > ', crossSellProducts)
 
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
@@ -21,8 +22,8 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
     const title = product.meta_data.find(item => item.key == "wc_title")
     const description = product.meta_data.find(item => item.key == "wc_desctiption")
 
-    function mathDiscount(salePrice, regularPrice){
-        let percent = (regularPrice-salePrice)*100/regularPrice
+    function mathDiscount(salePrice, regularPrice) {
+        let percent = (regularPrice - salePrice) * 100 / regularPrice
         return percent.toFixed(0)
     }
 
@@ -31,10 +32,11 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
     return (
         <>
             <Head>
-                <title>{title.value}</title>
-                <meta name="description" content={description.value} />
+                <title>{title ? title.value : `${product.name} купить в Интернет-магазине с доставкой недорого`}</title>
+                <meta name="description"
+                      content={description ? description.value : `${product.name} купить в Интернет-магазине с доставкой по России всего за ${product.price} руб. Производитель ${vendor.value}. Артикул ${product.sku} `}/>
             </Head>
-            <Header />
+            <Header/>
             <div className='site__container product'>
                 <div className='site__main__wrap product'>
                     <main role="main" className="site__main product">
@@ -45,7 +47,7 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                 path={pathLocation}
                                 namePage={product.name}
                                 parentCategoryName={product.categories[0].name}
-                                parentCategoryUrl={`${product.categories[0].slug}`+'?id='+`${product.categories[0].id}`}
+                                parentCategoryUrl={`${product.categories[0].slug}` + '?id=' + `${product.categories[0].id}`}
 
                             />
                             <div className="product_top_wrapper">
@@ -54,7 +56,7 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                         <div className="product_slider_wr">
                                             <div className="product_labels">
                                                 <div className="product_label_item product_sale">
-                                                    -{mathDiscount(product.sale_price,product.regular_price)} %
+                                                    -{mathDiscount(product.sale_price, product.regular_price)} %
                                                 </div>
                                             </div>
                                             <div className="product_slider">
@@ -74,12 +76,12 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                         <div className="product_top_block">
                                             <div className="product-compare">
                                                 <label>
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox"/>
                                                     Добавить к сравнению
                                                 </label>
                                             </div>
                                             <div className="product_name">
-                                                <Caption caption={product.name} />
+                                                <Caption caption={product.name}/>
                                             </div>
                                             <div className="vendor_option">
                                                 Производитель {vendor.value}
@@ -89,15 +91,16 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                             <div className="shop2_product_options_wr">
                                                 <div className="shop2_product_options">
                                                     {product.attributes.map((item, index) => {
-                                                        if (index < 4){
+                                                        if (index < 4) {
                                                             return (
-                                                                <div key={item.position} className="option_item odd type-select">
+                                                                <div key={item.position}
+                                                                     className="option_item odd type-select">
                                                                     <div className="option_title">{item.name}:</div>
                                                                     <div className="option_body">{item.options[0]}</div>
                                                                 </div>
                                                             )
                                                         }
-                                                        })}
+                                                    })}
                                                 </div>
                                             </div>
                                             <div className="product-price">
@@ -108,13 +111,27 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                                     <strong>{product.price}</strong> руб.
                                                 </div>
                                             </div>
-                                            <div className="shopName_info">
-                                                Товар продаётся в магазине <span>{shopName.value}</span>
-                                            </div>
                                             <div className="product_buttons">
                                                 <div className="product_buttons_in">
-                                                    <GoToPartner url={product.external_url} shopName={product.meta_data} />
+                                                    <GoToPartner url={product.external_url}
+                                                                 shopName={product.meta_data}/>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div className="product_categories_block">
+                                            <span className="caption">Товар находится в категориях:</span>
+                                            <div className="links">
+                                                {product.categories.map((item) => {
+                                                    return (
+                                                        <Link href={{
+                                                            pathname: `/catalog/${item.slug}`,
+                                                            query: {id: item.id}
+
+                                                        }}>
+                                                            <a>{item.name}</a>
+                                                        </Link>
+                                                    )
+                                                })}
                                             </div>
                                         </div>
                                     </div>
@@ -133,10 +150,12 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                     <div className="desc-area">
                                         <div className="shop_product_params">
                                             {product.attributes.map((item) => {
-                                                return(
+                                                return (
                                                     <div key={item.position} className="param_item">
-                                                        <div className="param_title">{item.name}</div>
-                                                        <div className="param_body">{item.options[0]}</div>
+                                                        <div
+                                                            className="param_title">{item.name}</div>
+                                                        <div
+                                                            className="param_body">{item.options[0]}</div>
                                                     </div>
                                                 )
                                             })}
@@ -153,42 +172,69 @@ export default function ProductPage({product, upsellProducts,crossSellProducts})
                                 </div>
                                 <ProductsSliderProductCard relatedProducts={upsellProducts}/>
                             </div>
-                            <div className="shop_kind_wrap">
-                                <div className="shop_collection_header">
-                                    C этим товаром смотрят
-                                </div>
-                                <ProductsSliderProductCard relatedProducts={crossSellProducts}/>
-                            </div>
+                            {/*<div className="shop_kind_wrap">*/
+                            }
+                            {/*    <div className="shop_collection_header">*/
+                            }
+                            {/*        C этим товаром смотрят*/
+                            }
+                            {/*    </div>*/
+                            }
+                            {/*    <ProductsSliderProductCard relatedProducts={crossSellProducts}/>*/
+                            }
+                            {/*</div>*/
+                            }
                         </div>
                     </main>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     )
 }
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context) {
 
-    const {data:product} = await getProductData(context.query.id)
+    const {data: product} = await getProductData(context.query.id)
+
+    const upsellProductsIds = []
+    const crossSellProductsIds = []
+
+    product.upsell_ids.map((item, index) => {
+        if (index < 6) {
+            upsellProductsIds.push(item)
+        }
+    })
+    product.cross_sell_ids.map((item, index) => {
+        if (index < 6) {
+            crossSellProductsIds.push(item)
+        }
+    })
+
+
     const upsellIds = []
     const crossSellIds = []
 
-    for (const item of product.upsell_ids){
-        let {data:upsellProduct} = await getProductData(item)
-        upsellIds.push(upsellProduct)
-    }
-    for (const item of product.cross_sell_ids){
-        let {data:crossSellProduct} = await getProductData(item)
-        crossSellIds.push(crossSellProduct)
-    }
+    // for (const item of upsellProductsIds){
+    //     let {data:upsellProduct} = await getProductData(item)
+    //     upsellIds.push(upsellProduct)
+    // }
+    // for (const item of crossSellProductsIds){
+    //     let {data:crossSellProduct} = await getProductData(item)
+    //     crossSellIds.push(crossSellProduct)
+    // }
 
-    // const {data:upsellProduct0} = await getProductData(product.upsell_ids[0])
-    // const {data:upsellProduct1} = await getProductData(product.upsell_ids[1])
-    // const {data:upsellProduct2} = await getProductData(product.upsell_ids[2])
-    // const {data:upsellProduct3} = await getProductData(product.upsell_ids[3])
-    // const {data:upsellProduct4} = await getProductData(product.upsell_ids[4])
-    return{
+    await Promise.all(upsellProductsIds.map(async (item) => {
+        let {data: upsellProduct} = await getProductData(item)
+        upsellIds.push(upsellProduct)
+    }))
+
+    // await Promise.all(crossSellProductsIds.map(async (item) => {
+    //     let {data:crossSellProduct} = await getProductData(item)
+    //     crossSellIds.push(crossSellProduct)
+    // }))
+
+    return {
         props: {
             product: product ?? {},
             upsellProducts: upsellIds ?? {},

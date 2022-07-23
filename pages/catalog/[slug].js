@@ -10,18 +10,26 @@ import Filter from "../../components/filter";
 import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
+import Towns from "../../utils/towns";
 
 const Slug = ({products,categories,currentCategoryId}) => {
     const currentCategory = categories.find(item => item.id == currentCategoryId)
-    console.log('products from cat >', products)
     console.log('category info >', categories)
     const pathLocation = useRouter().asPath
     const currentPage = useRouter().query.page
+    let currentPageNum = currentPage == undefined ? 0: currentPage
+
+    let townCaption = currentCategory.name
+    if (Towns[currentPageNum]){
+        townCaption = `${currentCategory.name} в ${Towns[currentPageNum]}`
+    }
+
     return (
         <>
             <Head>
-                <title>Купить автомобильные диски в Москве</title>
-                <meta name="description" content="Каталог автомобильных дисков" />
+                <title>Купить {currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого</title>
+                <meta name="description" content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`} />
+                {Towns[currentPageNum] ? true:<meta name="robots" content="noindex, nofollow" /> }
             </Head>
             <Header />
             <div className='site__container'>
@@ -29,7 +37,7 @@ const Slug = ({products,categories,currentCategoryId}) => {
                     <main role="main" className="site__main folder">
                         <div className="site__main__in">
                             <BreadCrumbs isCatalog={true} path={pathLocation} namePage={currentCategory.name}/>
-                            <Caption caption={currentCategory.name} />
+                            <Caption caption={townCaption} />
                             <div className="mode_folder_wrapper">
                                 <Filter />
                                 <div className="mode_folder_body">
@@ -37,9 +45,10 @@ const Slug = ({products,categories,currentCategoryId}) => {
                                     <ProductList products={products} />
                                     <Pagination
                                         totalQuantityProducts={currentCategory.count}
-                                        currentCategory={currentCategory.slug}
+                                        currentSlug={currentCategory.slug}
                                         currentCategoryId={currentCategoryId}
                                         currentPage={currentPage}
+                                        typePage={'catalog'}
                                     />
                                 </div>
                             </div>
@@ -54,14 +63,16 @@ const Slug = ({products,categories,currentCategoryId}) => {
 
 export default Slug;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(ctx) {
+    console.log('777 > ',ctx)
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(context.query.id);
+    const {data: products} = await getProductsData(ctx.query.id,ctx.query.page);
+
     return {
         props: {
             categories: categories ?? {},
             products: products ?? {},
-            currentCategoryId: context.query.id
+            currentCategoryId: ctx.query.id
         }
     }
 }

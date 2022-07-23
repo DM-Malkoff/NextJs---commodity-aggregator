@@ -8,7 +8,6 @@ export default function BreadCrumbs({path, isCatalog, parentCategoryName, parent
             {parentCategoryName && <Link href={`/catalog/${parentCategoryUrl}`}><a><span>{parentCategoryName}</span></a></Link> }
             {isProduct && <span>{namePage}</span>}
             {!isProduct && <Link href={path}><a><span>{namePage}</span></a></Link>}
-
         </div>
     )
 }

@@ -2,10 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import GoToPartner from "./goToPartner";
 
-const ProductCard = ({productData, indexEl}) => {
-    // console.log('productData > ',productData.related_ids)
-    // console.log('relatedProducts > ',relatedProducts)
-
+const ProductCard = ({productData}) => {
     function mathDiscount(salePrice, regularPrice){
         let percent = (regularPrice-salePrice)*100/regularPrice
         return percent.toFixed(0)

@@ -1,12 +1,12 @@
 import {quantityProducts} from "../constants/config";
 import Link from "next/link";
 
-const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, currentPage}) => {
-    console.log('currentCategory >>', currentCategory)
+const Pagination = ({typePage,totalQuantityProducts, currentSlug, currentCategoryId, currentPage}) => {
+    console.log('currentSlug >>', currentSlug)
     console.log('currentPage >>', currentPage)
     console.log('totalQuantityProducts >>', Math.ceil(totalQuantityProducts / quantityProducts))
 
-    if (currentPage != undefined){
+    if (currentPage != undefined) {
         currentPage = +currentPage
     }
 
@@ -21,7 +21,7 @@ const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, 
             <ul className="shop_pagelist">
                 <li className={`page-prev ${currentPage == undefined ? 'not_active' : ''}`}>
                     <Link href={{
-                        pathname: `/catalog/${currentCategory}`,
+                        pathname: `/${typePage}}/${currentSlug}`,
                         query: {
                             id: currentCategoryId,
                             page: currentPage - 1
@@ -31,14 +31,15 @@ const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, 
 
                 {currentPage > 1
                     ?
-                    <li className="page-num"><Link href=
-                                                       {{
-                                                           pathname: `/catalog/${currentCategory}`,
-                                                           query: {
-                                                               id: currentCategoryId
-                                                           }
-                                                       }}
-                    ><a>1</a></Link></li>
+                    <li className="page-num">
+                        <Link href={{
+                            pathname: `/${typePage}/${currentSlug}`,
+                            query: {
+                                id: currentCategoryId
+                            }
+                        }}
+                        ><a>1</a>
+                        </Link></li>
                     :
                     <li className="page-num active-num"><span>1</span></li>
                 }
@@ -46,17 +47,16 @@ const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, 
                     currentPage > 3 ? <li className="page-num"><span>...</span></li> : false
                 }
                 {pageNumbers.map((number) => {
-                    if (currentPage == undefined && number < 5 && number > 1){
+                    if (currentPage == undefined && number < 5 && number > 1) {
                         return (
                             <li key={number} className="page-num">
-                                <Link href=
-                                          {{
-                                              pathname: `/catalog/${currentCategory}`,
-                                              query: {
-                                                  id: currentCategoryId,
-                                                  page: number
-                                              }
-                                          }}
+                                <Link href={{
+                                    pathname: `/${typePage}/${currentSlug}`,
+                                    query: {
+                                        id: currentCategoryId,
+                                        page: number
+                                    }
+                                }}
                                 ><a>{number}</a>
                                 </Link>
                             </li>
@@ -70,14 +70,13 @@ const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, 
                         } else {
                             return (
                                 <li key={number} className="page-num">
-                                    <Link href=
-                                              {{
-                                                  pathname: `/catalog/${currentCategory}`,
-                                                  query: {
-                                                      id: currentCategoryId,
-                                                      page: number
-                                                  }
-                                              }}
+                                    <Link href={{
+                                        pathname: `/${typePage}/${currentSlug}`,
+                                        query: {
+                                            id: currentCategoryId,
+                                            page: number
+                                        }
+                                    }}
                                     ><a>{number}</a>
                                     </Link>
                                 </li>
@@ -86,23 +85,23 @@ const Pagination = ({totalQuantityProducts, currentCategory, currentCategoryId, 
                     }
                 })}
                 {
-                    (currentPage < pageNumbers.length - 2 || currentPage == undefined) ? <li className="page-num"><span>...</span></li> : false
+                    (currentPage < pageNumbers.length - 2 || currentPage == undefined) ?
+                        <li className="page-num"><span>...</span></li> : false
                 }
                 {(currentPage < pageNumbers.length - 1 || currentPage == undefined) ?
-                    <li className="page-num"><Link href=
-                                                       {{
-                                                           pathname: `/catalog/${currentCategory}`,
-                                                           query: {
-                                                               id: currentCategoryId,
-                                                               page: pageNumbers.length
-                                                           }
-                                                       }}
+                    <li className="page-num"><Link href={{
+                        pathname: `/${typePage}/${currentSlug}`,
+                        query: {
+                            id: currentCategoryId,
+                            page: pageNumbers.length
+                        }
+                    }}
                     ><a>{pageNumbers.length}</a></Link></li>
                     : false}
 
                 <li className={`page-next ${currentPage == Math.ceil(totalQuantityProducts / quantityProducts) ? 'not_active' : ''}`}>
                     <Link href={{
-                        pathname: `/catalog/${currentCategory}`,
+                        pathname: `/${typePage}/${currentSlug}`,
                         query: {
                             id: currentCategoryId,
                             page: currentPage + 1

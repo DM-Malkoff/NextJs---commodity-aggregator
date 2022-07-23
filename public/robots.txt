@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /gotoshop
+
+Sitemap: https://site.ru/sitemap.xml
