@@ -2,7 +2,7 @@
 const nextConfig = {
   //reactStrictMode: true,
   images: {
-    domains: ['wp.moscow-shiny.ru'],
+    domains: ['cms.moscow-shiny.ru'],
   }
 }
 

@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /gotoshop
+Disallow: /search/
 
-Sitemap: https://site.ru/sitemap.xml
+Sitemap: https://moscow-shiny.ru/sitemap.xml

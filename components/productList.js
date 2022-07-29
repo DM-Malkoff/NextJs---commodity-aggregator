@@ -7,7 +7,7 @@ import ProductCard from "./productCard";
 const ProductList = ({products}) => {
         function goToOuterTransition(link, data){
         localStorage.setItem('external-link',link)
-        const shopName = data.find(item => item.key == 'Магазин')
+        const shopName = data.find(item => item.key == 'shop_name')
         localStorage.setItem('shopName', shopName.value)
         Router.push(`/gotoshop/`);
     }

@@ -29,7 +29,15 @@ const PopularProductsSlider = ({data,caption}) => {
                                         <div key={product.id} className="main__block__item slick-slide" >
                                             <form className="shop2-product-item">
                                                 <div className="product__image">
-                                                    <a href="/">
+                                                    <Link href={
+                                                        {
+                                                            pathname:`/p/${product.slug}`,
+                                                            query: {
+                                                                id:product.id
+                                                            }
+                                                        }
+                                                    }>
+                                                    <a>
                                                         <Image
                                                             src={product.images[0].src}
                                                             alt={product.images[0].name}
@@ -37,9 +45,19 @@ const PopularProductsSlider = ({data,caption}) => {
                                                             height={200}
                                                         />
                                                     </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="product__name">
-                                                    <Link href="/"><a>{product.name}</a></Link>
+                                                    <Link href={
+                                                        {
+                                                            pathname:`/p/${product.slug}`,
+                                                            query: {
+                                                                id:product.id
+                                                            }
+                                                        }
+                                                    }>
+                                                        <a>{product.name}</a>
+                                                    </Link>
                                                 </div>
                                                 <div className="product__price">
                                                     <div className="price-old question">

@@ -3,16 +3,15 @@ import React, {useEffect, useState} from "react";
 import Header from "../components/layouts/header";
 import SearchBlock from "../components/searchBlock";
 import {getProductsData} from "../utils/products";
-import Link from "next/link";
 import Footer from "../components/layouts/footer";
 import PopularProductsSlider from "../components/popularProductsSlider";
 import {getCategories} from "../utils/categories";
 
 function Home({productsTires, productsDiscs,categories}) {
     useEffect(() => {
-        const categoriesBlock = Array.from(document.getElementsByClassName('popular__folders__block'))
-        const categoriesBlockHeight = categoriesBlock[0].scrollHeight
-        setCategoriesBlockHeight(categoriesBlockHeight)
+        // const categoriesBlock = Array.from(document.getElementsByClassName('popular__folders__block'))
+        // const categoriesBlockHeight = categoriesBlock[0].scrollHeight
+        // setCategoriesBlockHeight(categoriesBlockHeight)
 
         //слайдер
         const slickTrack = Array.from(document.getElementsByClassName('slick-track'))
@@ -21,13 +20,6 @@ function Home({productsTires, productsDiscs,categories}) {
         })
 
     }, []);
-
-    const [moreCategories, setMoreCategories] = useState(false)
-    const [categoriesBlockHeight, setCategoriesBlockHeight] = useState(260)
-    const getMoreCategories = () => {
-        setMoreCategories(!moreCategories)
-    }
-    console.log('categories > ', categories)
 
     return (
         <>
@@ -39,85 +31,9 @@ function Home({productsTires, productsDiscs,categories}) {
             <Header/>
             <div className='site__container'>
                 <SearchBlock/>
-                <div className="popular__folders__wrapper">
-                    <div className="popular__folders__wrap">
-                        <div className="block__titles__wrap">
-                            <div className="block__title">Популярные категории</div>
-                        </div>
-                        <div className="popular__folders__block"
-                             style={{height: `${moreCategories ? categoriesBlockHeight + 'px' : '260px'}`}}>
-                            <ul className="gr-categories popular__folders menu-default">
-
-
-                                <li className="popular "><Link href="/"><a>Шины</a></Link>
-                                    <ul className="level-2">
-                                        {categories.map((item,index) => {
-                                            if (index > 0){
-                                                return(
-                                                    <li>
-                                                        <Link href={{
-                                                            pathname: `/catalog/${item.slug}`,
-                                                            query: {
-                                                                id: item.id
-                                                            }
-                                                        }}>
-                                                            <a>{item.name}</a>
-                                                        </Link>
-                                                    </li>
-                                                )
-                                            }
-                                        })}
-                                        <li><Link href="/"><a>Шины легковые</a></Link></li>
-                                        <li><Link href="/"><a>Шины легкогрузовые</a></Link></li>
-                                        <li><Link href="/"><a>Шины для внедорожников</a></Link></li>
-                                        <li><Link href="/"><a>Шины для микроавтобусов</a></Link></li>
-                                        <li><Link href="/"><a>Шины для кроссоверов</a></Link></li>
-                                    </ul>
-                                    <Link href="/"><a className="folders__more__button">Смотреть все</a></Link>
-                                </li>
-                                <li className="popular ">
-                                    <Link href="/"><a>Диски</a></Link>
-                                    <ul className="level-2">
-                                        <li><Link href="/"><a>Литые диски</a></Link></li>
-                                        <li><Link href="/"><a>Штампованные диски</a></Link></li>
-                                        <li><Link href="/"><a>Стальные диски</a></Link></li>
-                                        <li><Link href="/"><a>Кованые диски</a></Link></li>
-                                    </ul>
-                                </li>
-                                <li className="popular "><Link href="/"><a>Бренды</a></Link>
-                                    <ul className="level-2">
-                                        <li><Link href="/"><a>Бренд №1</a></Link></li>
-                                        <li><Link href="/"><a>Бренд №3</a></Link></li>
-                                        <li><Link href="/"><a>Бренд №5</a></Link></li>
-                                    </ul>
-                                    <Link href="/"><a className="folders__more__button">Смотреть все</a></Link>
-                                </li>
-                                <li className="popular "><Link href="/"><a>Автозапчасти</a></Link>
-                                    <ul className="level-2">
-                                        <li><Link href="/"><a>Бампер задний</a></Link></li>
-                                        <li><Link href="/"><a>Бампер передний</a></Link></li>
-                                    </ul>
-                                </li>
-                                <li className="popular"><Link href="/"><a>Автоаксессуары</a></Link>
-                                    <ul className="level-2">
-                                        <li><Link href="/"><a>Видеорегистраторы</a></Link></li>
-                                        <li><Link href="/"><a>Автомобильная оптика</a></Link></li>
-                                        <li><Link href="/"><a>Антирадары</a></Link></li>
-                                        <li><Link href="/"><a>Видеорекордер</a></Link></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="more__folders__btn">
-                            <span className={moreCategories ? 'active' : ''}
-                                  onClick={getMoreCategories}>еще категории</span>
-                        </div>
-                    </div>
-                </div>
 
                 <PopularProductsSlider data={productsTires} caption={'Популярные шины'}/>
                 <PopularProductsSlider data={productsDiscs} caption={'Популярные диски'}/>
-
 
                 <div className="text__block__wrapper">
                     <div className="text__block__wrap">

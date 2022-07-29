@@ -3,6 +3,10 @@ import Image from "next/image";
 import GoToPartner from "./goToPartner";
 
 const ProductCard = ({productData}) => {
+    console.log(productData)
+    const customFields = productData.meta_data
+    const shopName = customFields.find(item => item.key == 'shop_name') ? customFields.find(item => item.key == 'shop_name').value : ''
+
     function mathDiscount(salePrice, regularPrice){
         let percent = (regularPrice-salePrice)*100/regularPrice
         return percent.toFixed(0)
@@ -30,7 +34,6 @@ const ProductCard = ({productData}) => {
                                 Добавить к сравнению
                             </label>
                         </div>
-                        {/*<span className='short-description'>{productData.short_description}</span>*/}
                     </div>
                     <div className="product_image_wr">
                         <div className="product_image">
@@ -44,8 +47,8 @@ const ProductCard = ({productData}) => {
                             }>
                                 <a>
                                     <Image
-                                        src={productData.images[0].src}
-                                        alt="Picture of the author"
+                                        src={productData.images[0].src? productData.images[0].src: ''}
+                                        alt={productData.name}
                                         width={200}
                                         height={200}
                                     />
@@ -67,7 +70,7 @@ const ProductCard = ({productData}) => {
                                 <strong>{productData.sale_price}</strong> руб.
                             </div>
                         </div>
-                        <GoToPartner url={productData.external_url} shopName={productData.meta_data}/>
+                        <GoToPartner url={productData.external_url} shopName={shopName}/>
                     </div>
 
                 </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {useState} from "react";
+import Image from "next/image";
 
 const Header = () => {
     const [showMainMenu, setShowMainMenu] = useState(false)
@@ -87,23 +88,24 @@ const Header = () => {
                         <div className='site__header__top__in'>
                             <div className='site__header__top'>
                                 <div className='header__top__left'>
-                                <span className="folders__popup__btn burger__block__btn"
-                                      onClick={() => handlerShowMenu()}>
-                                    <a>Каталог</a>
-                                </span>
+                                    <Link href='/'><a>
+                                        <Image src='/images/logo.jpg'
+                                               width='160'
+                                               height='30'
+                                               alt='moscow-shiny.ru'
+                                        />
+                                    </a>
+                                    </Link>
+                                {/*<span className="folders__popup__btn burger__block__btn"*/}
+                                {/*      onClick={() => handlerShowMenu()}>*/}
+                                {/*    <a>Каталог</a>*/}
+                                {/*</span>*/}
                                 </div>
                                 <div className='header__top__center'>
                                     <ul className="menu-default top__menu">
-                                        <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link>
-                                        </li>
-                                        <li><Link href="/about"><a><span>О компании</span></a></Link>
-                                            <ul className="level-2">
-                                                <li><a href="/otzyvy"><span>Отзывы</span></a></li>
-                                                <li><a href="/novosti"><span>Новости</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/servis-i-uslugi"><span>Сервис и услуги</span></a></li>
-                                        <li><a href="/kontakty"><span>Контакты</span></a></li>
+                                        <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
+                                        <li><Link href="/catalog/shiny?id=16"><a><span>Шины</span></a></Link></li>
+                                        <li><Link href="/catalog/diski?id=17"><a><span>Диски</span></a></Link></li>
                                     </ul>
                                 </div>
                                 <div className='header__top__right'>

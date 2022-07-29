@@ -1,7 +1,6 @@
 import styles from "../styles/searchBlock.module.scss"
 import {useState} from "react";
 const SearchBlock = () =>{
-    //if (process.browser){
         const [clickedMoreButton,setClickedMoreButton] = useState(false)
         const moreButtonClick = () => {
             setClickedMoreButton(!clickedMoreButton)

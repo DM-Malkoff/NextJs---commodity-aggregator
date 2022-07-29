@@ -7,27 +7,31 @@ import Head from "next/head";
 import Image from "next/image";
 import {getProductData} from "../../utils/product";
 import GoToPartner from "../../components/goToPartner";
-import ProductCard from "../../components/productCard";
 import ProductsSliderProductCard from "../../components/productsSliderProductCard";
 import Link from "next/link";
+import {useState} from "react";
+import Tabs from "../../components/tabs";
 
-export default function ProductPage({product, upsellProducts, crossSellProducts}) {
+export default function ProductPage({product, upsellProducts}) {
     console.log('product > ', product)
-    console.log('upsellProducts > ', upsellProducts)
-    console.log('crossSellProducts > ', crossSellProducts)
 
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
     const vendor = product.meta_data.find(item => item.key == "Производитель")
     const title = product.meta_data.find(item => item.key == "wc_title")
     const description = product.meta_data.find(item => item.key == "wc_desctiption")
+    const shopName = customFields.find(item => item.key == 'shop_name').value
+
+    const tabsItems =[
+        {title: 'Характеристики', content :product.attributes},
+        {title: 'Описание', content: product.description}
+    ]
 
     function mathDiscount(salePrice, regularPrice) {
         let percent = (regularPrice - salePrice) * 100 / regularPrice
         return percent.toFixed(0)
     }
 
-    const shopName = customFields.find(item => item.key == 'Магазин')
 
     return (
         <>
@@ -84,7 +88,7 @@ export default function ProductPage({product, upsellProducts, crossSellProducts}
                                                 <Caption caption={product.name}/>
                                             </div>
                                             <div className="vendor_option">
-                                                Производитель {vendor.value}
+                                                {/*Производитель {vendor.value}*/}
                                             </div>
                                         </div>
                                         <div className="product_bot_block">
@@ -114,7 +118,7 @@ export default function ProductPage({product, upsellProducts, crossSellProducts}
                                             <div className="product_buttons">
                                                 <div className="product_buttons_in">
                                                     <GoToPartner url={product.external_url}
-                                                                 shopName={product.meta_data}/>
+                                                                 shopName={shopName}/>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,7 +132,7 @@ export default function ProductPage({product, upsellProducts, crossSellProducts}
                                                             query: {id: item.id}
 
                                                         }}>
-                                                            <a>{item.name}</a>
+                                                            <a key={item.id}>{item.name}</a>
                                                         </Link>
                                                     )
                                                 })}
@@ -139,29 +143,7 @@ export default function ProductPage({product, upsellProducts, crossSellProducts}
                             </div>
                             <div className="shop_product_data">
                                 <div className="shop_product_tabs_wr">
-                                    <ul className="shop_product_tabs">
-                                        <li className="active-tab">
-                                            <span className="r-tabs-anchor">Характеристики</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div className="shop_product_desc">
-                                    <div className="desc-area">
-                                        <div className="shop_product_params">
-                                            {product.attributes.map((item) => {
-                                                return (
-                                                    <div key={item.position} className="param_item">
-                                                        <div
-                                                            className="param_title">{item.name}</div>
-                                                        <div
-                                                            className="param_body">{item.options[0]}</div>
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                        <div className="shop2-clear-container"></div>
-                                    </div>
+                                    <Tabs items={tabsItems} />
                                 </div>
                                 <div className="shop2-clear-container"></div>
                             </div>
@@ -172,18 +154,6 @@ export default function ProductPage({product, upsellProducts, crossSellProducts}
                                 </div>
                                 <ProductsSliderProductCard relatedProducts={upsellProducts}/>
                             </div>
-                            {/*<div className="shop_kind_wrap">*/
-                            }
-                            {/*    <div className="shop_collection_header">*/
-                            }
-                            {/*        C этим товаром смотрят*/
-                            }
-                            {/*    </div>*/
-                            }
-                            {/*    <ProductsSliderProductCard relatedProducts={crossSellProducts}/>*/
-                            }
-                            {/*</div>*/
-                            }
                         </div>
                     </main>
                 </div>

@@ -2,16 +2,21 @@ import {useRouter} from "next/router";
 import MainLayout from "../../components/layouts/MainLayout";
 import {getSearchProducts} from "../../utils/searchProducts";
 import ProductList from "../../components/productList";
-import Pagination from "../../components/pagination";
+import Head from "next/head";
 
 const SearchProducts = ({searchResults}) => {
     console.log("SearchResults Length >> ", searchResults.length)
     const searchQuery = useRouter().query.id
 
     return (
-        <div>
+        <>
+            <Head>
+                <title>Поиск товаров</title>
+                <meta name="description" content="Здесь Вы можете найте интересующий товар в нашем каталоге по названию" />
+                <meta name="robots" content="noindex, follow" />
+            </Head>
             <MainLayout caption={'Поиск товаров'}>
-                <div className="">По запросу <span>{searchQuery}</span> найдено {searchResults.length} товаров.</div>
+                <div className="search__message">По запросу <span>{searchQuery}</span> найдено {searchResults.length} товаров.</div>
                 {searchResults.length ?
                     <ProductList products={searchResults} />:
                     <div className="g-notice g-notice--indents">
@@ -19,7 +24,7 @@ const SearchProducts = ({searchResults}) => {
                     </div>
                 }
             </MainLayout>
-        </div>
+        </>
     );
 };
 
@@ -27,7 +32,7 @@ export default SearchProducts;
 
 export async function getServerSideProps(ctx){
     console.log(ctx)
-    const {data: searchResults} = await getSearchProducts(encodeURI(ctx.query.id,ctx.query.page))
+    const {data: searchResults} = await getSearchProducts(encodeURI(ctx.query.id))
     return{
         props: {
             searchResults: searchResults
