@@ -11,16 +11,17 @@ import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
+import {quantityProducts} from "../../constants/config";
 
-const Slug = ({products,categories,currentCategoryId}) => {
+const Slug = ({products, categories, currentCategoryId}) => {
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     console.log('category info >', categories)
     const pathLocation = useRouter().asPath
     const currentPage = useRouter().query.page
-    let currentPageNum = currentPage == undefined ? 0: currentPage
+    let currentPageNum = currentPage == undefined ? 0 : currentPage
 
     let townCaption = currentCategory.name
-    if (Towns[currentPageNum]){
+    if (Towns[currentPageNum]) {
         townCaption = `${currentCategory.name} в ${Towns[currentPageNum]}`
     }
 
@@ -28,21 +29,22 @@ const Slug = ({products,categories,currentCategoryId}) => {
         <>
             <Head>
                 <title>Купить {currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого</title>
-                <meta name="description" content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`} />
-                {Towns[currentPageNum] ? true:<meta name="robots" content="noindex, nofollow" /> }
+                <meta name="description"
+                      content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
+                {Towns[currentPageNum] ? true : <meta name="robots" content="noindex, nofollow"/>}
             </Head>
-            <Header />
+            <Header/>
             <div className='site__container'>
                 <div className='site__main__wrap folder'>
                     <main role="main" className="site__main folder">
                         <div className="site__main__in">
-                            <BreadCrumbs isCatalog={true} path={pathLocation} namePage={currentCategory.name}/>
-                            <Caption caption={townCaption} />
+                            <BreadCrumbs path={pathLocation} namePage={currentCategory.name}/>
+                            <Caption caption={townCaption}/>
                             <div className="mode_folder_wrapper">
-                                <Filter />
+                                <Filter/>
                                 <div className="mode_folder_body">
-                                    <Sort />
-                                    <ProductList products={products} />
+                                    <Sort/>
+                                    <ProductList products={products}/>
                                     <Pagination
                                         totalQuantityProducts={currentCategory.count}
                                         currentSlug={currentCategory.slug}
@@ -56,7 +58,7 @@ const Slug = ({products,categories,currentCategoryId}) => {
                     </main>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };
@@ -64,9 +66,8 @@ const Slug = ({products,categories,currentCategoryId}) => {
 export default Slug;
 
 export async function getServerSideProps(ctx) {
-    console.log('777 > ',ctx)
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(ctx.query.id,ctx.query.page);
+    const {data: products} = await getProductsData(ctx.query.id, ctx.query.page, quantityProducts);
 
     return {
         props: {

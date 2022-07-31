@@ -3,6 +3,7 @@ import MainLayout from "../../components/layouts/MainLayout";
 import {getSearchProducts} from "../../utils/searchProducts";
 import ProductList from "../../components/productList";
 import Head from "next/head";
+import Link from "next/link";
 
 const SearchProducts = ({searchResults}) => {
     console.log("SearchResults Length >> ", searchResults.length)
@@ -20,7 +21,7 @@ const SearchProducts = ({searchResults}) => {
                 {searchResults.length ?
                     <ProductList products={searchResults} />:
                     <div className="g-notice g-notice--indents">
-                        Ничего не найдено. Вы можете вернуться на  <a href="/">главную</a> страницу сайта или изменить свой запрос и повторить поиск.
+                        Ничего не найдено. Вы можете вернуться на  <Link href="/"><a>главную</a></Link> страницу сайта или изменить свой запрос и повторить поиск.
                     </div>
                 }
             </MainLayout>

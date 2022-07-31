@@ -3,14 +3,14 @@ import Image from "next/image";
 import GoToPartner from "./goToPartner";
 
 const ProductCard = ({productData}) => {
-    console.log(productData)
     const customFields = productData.meta_data
     const shopName = customFields.find(item => item.key == 'shop_name') ? customFields.find(item => item.key == 'shop_name').value : ''
 
-    function mathDiscount(salePrice, regularPrice){
-        let percent = (regularPrice-salePrice)*100/regularPrice
+    function mathDiscount(salePrice, regularPrice) {
+        let percent = (regularPrice - salePrice) * 100 / regularPrice
         return percent.toFixed(0)
     }
+
     return (
         <div key={productData.id} className='shop2_product_item'>
             <div className='shop2_item_in'>
@@ -19,9 +19,9 @@ const ProductCard = ({productData}) => {
                         <div className="product_name">
                             <Link href={
                                 {
-                                    pathname:`/p/${productData.slug}`,
+                                    pathname: `/p/${productData.slug}`,
                                     query: {
-                                        id:productData.id
+                                        id: productData.id
                                     }
                                 }
                             }>
@@ -30,7 +30,7 @@ const ProductCard = ({productData}) => {
                         </div>
                         <div className="product-compare">
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox"/>
                                 Добавить к сравнению
                             </label>
                         </div>
@@ -39,15 +39,15 @@ const ProductCard = ({productData}) => {
                         <div className="product_image">
                             <Link href={
                                 {
-                                    pathname:`/p/${productData.slug}`,
+                                    pathname: `/p/${productData.slug}`,
                                     query: {
-                                        id:productData.id
+                                        id: productData.id
                                     }
                                 }
                             }>
                                 <a>
                                     <Image
-                                        src={productData.images[0].src? productData.images[0].src: ''}
+                                        src={productData.images.length ? productData.images[0].src : '/images/no_image.png'}
                                         alt={productData.name}
                                         width={200}
                                         height={200}
@@ -57,7 +57,8 @@ const ProductCard = ({productData}) => {
                         </div>
                         <div className="product-label">
                             <div className="product_label_item product-sale">
-                                -{mathDiscount(productData.sale_price,productData.regular_price)} %</div>
+                                -{mathDiscount(productData.sale_price, productData.regular_price)} %
+                            </div>
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-const goToShop = ({prevUrl}) => {
+const GoToShop = ({prevUrl}) => {
     console.log(prevUrl)
     const shopName = localStorage.getItem('shopName')
 
@@ -416,7 +416,7 @@ const goToShop = ({prevUrl}) => {
         </div>
     );
 };
-export default goToShop;
+export default GoToShop;
 
 export async function getServerSideProps(context){
     return {

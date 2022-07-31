@@ -6,8 +6,9 @@ import {getProductsData} from "../utils/products";
 import Footer from "../components/layouts/footer";
 import PopularProductsSlider from "../components/popularProductsSlider";
 import {getCategories} from "../utils/categories";
+import {quantityProductsMainSlider} from "../constants/config";
 
-function Home({productsTires, productsDiscs,categories}) {
+function Home({productsTires, productsDiscs, categories}) {
     useEffect(() => {
         // const categoriesBlock = Array.from(document.getElementsByClassName('popular__folders__block'))
         // const categoriesBlockHeight = categoriesBlock[0].scrollHeight
@@ -66,8 +67,8 @@ function Home({productsTires, productsDiscs,categories}) {
 export default Home;
 
 export async function getServerSideProps() {
-    const {data: productsTires} = await getProductsData(4327);
-    const {data: productsDiscs} = await getProductsData(4328);
+    const {data: productsTires} = await getProductsData(16, 1, quantityProductsMainSlider);
+    const {data: productsDiscs} = await getProductsData(17, 1, quantityProductsMainSlider);
     const {data: categories} = await getCategories();
     return {
         props: {

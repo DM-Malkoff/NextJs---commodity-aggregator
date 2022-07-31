@@ -32,7 +32,6 @@ export default function ProductPage({product, upsellProducts}) {
         return percent.toFixed(0)
     }
 
-
     return (
         <>
             <Head>
@@ -46,7 +45,6 @@ export default function ProductPage({product, upsellProducts}) {
                     <main role="main" className="site__main product">
                         <div className="site__main__in">
                             <BreadCrumbs
-                                isCatalog={true}
                                 isProduct={true}
                                 path={pathLocation}
                                 namePage={product.name}
@@ -66,7 +64,7 @@ export default function ProductPage({product, upsellProducts}) {
                                             <div className="product_slider">
                                                 <div className="product_image">
                                                     <Image
-                                                        src={product.images[0].src}
+                                                        src={product.images.length ? product.images[0].src : '/images/no_image.png'}
                                                         alt={product.name}
                                                         title=''
                                                         width='460'
@@ -127,12 +125,12 @@ export default function ProductPage({product, upsellProducts}) {
                                             <div className="links">
                                                 {product.categories.map((item) => {
                                                     return (
-                                                        <Link href={{
+                                                        <Link key={item.id} href={{
                                                             pathname: `/catalog/${item.slug}`,
                                                             query: {id: item.id}
 
                                                         }}>
-                                                            <a key={item.id}>{item.name}</a>
+                                                            <a >{item.name}</a>
                                                         </Link>
                                                     )
                                                 })}

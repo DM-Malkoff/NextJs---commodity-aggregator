@@ -81,11 +81,11 @@ export default function Filter(){
                             <div className="shop_filter_field shop2-filter-fields type-select">
                                 <div className="filter_field_title">Диаметр:</div>
                                 <div className="filter_field_body">
-                                    <span data-name="s[diametr][]" data-value="55798261" className="param_val">14"</span>
-                                    <span data-name="s[diametr][]" data-value="56329861" className="param_val">16" </span>
-                                    <span data-name="s[diametr][]" data-value="56535661" className="param_val">17"</span>
-                                    <span data-name="s[diametr][]" data-value="56534261" className="param_val">18"</span>
-                                    <span data-name="s[diametr][]" data-value="55801261" className="param_val">19"</span>
+                                    <span data-name="s[diametr][]" data-value="55798261" className="param_val">14&quot;</span>
+                                    <span data-name="s[diametr][]" data-value="56329861" className="param_val">16&quot;</span>
+                                    <span data-name="s[diametr][]" data-value="56535661" className="param_val">17&quot;</span>
+                                    <span data-name="s[diametr][]" data-value="56534261" className="param_val">18&quot;</span>
+                                    <span data-name="s[diametr][]" data-value="55801261" className="param_val">19&quot;</span>
                                 </div>
                             </div>
                             <div className="shop_filter_field shop2-filter-fields type-select">

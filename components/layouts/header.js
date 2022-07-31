@@ -45,7 +45,7 @@ const Header = () => {
                             </div>
                         </div>
                         <ul className="menu-default top__menu">
-                            <li className="opened active"><a href="/"><span>Главная</span></a></li>
+                            <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
                             <li><a href="/o-kompanii"><span>О сервисе</span></a></li>
                             <li><a href="/aktsii"><span>Акции</span></a></li>
                             <li><a href="/poleznoye"><span>Полезное</span></a></li>

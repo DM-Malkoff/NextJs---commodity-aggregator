@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, {useState} from "react";
+import {visibleProductsMainSlider} from "../constants/config";
 
 const PopularProductsSlider = ({data,caption}) => {
-    const visibleProduct = 5
+    const visibleProduct = visibleProductsMainSlider
     const [indexEl, setSliderPopularIndex] = useState(0)
 
     const handleArrow = (direction) => {
@@ -39,8 +40,9 @@ const PopularProductsSlider = ({data,caption}) => {
                                                     }>
                                                     <a>
                                                         <Image
-                                                            src={product.images[0].src}
-                                                            alt={product.images[0].name}
+
+                                                            src={product.images.length ? product.images[0].src : '/images/no_image.png'}
+                                                            alt={product.name}
                                                             width={200}
                                                             height={200}
                                                         />
@@ -83,9 +85,7 @@ const PopularProductsSlider = ({data,caption}) => {
                                             </li>
                                         )
                                     }
-                                    }
-                                    )
-                                }
+                                })}
                             </ul>
                         </div>
                     </div>

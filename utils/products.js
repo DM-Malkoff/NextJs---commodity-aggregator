@@ -1,10 +1,10 @@
 import api from "../api";
 import {quantityProducts} from "../constants/config";
 
-export const getProductsData = async (categoryId, numPage) => {
+export const getProductsData = async (categoryId, numPage, qntProducts) => {
     if (numPage){
         return await api.get(
-            `products?category=${categoryId}&page=${numPage}&per_page=${quantityProducts}`
+            `products?category=${categoryId}&page=${numPage}&per_page=${qntProducts}`
         );
     }
     else{
