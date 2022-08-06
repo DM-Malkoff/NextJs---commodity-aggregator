@@ -20,13 +20,13 @@ const Header = () => {
             <div className={`burger__block__wrapper${showMainMenu ? ' active' : ''}`}>
                 <div className="burger__block__wrap">
                     <div className=" burger__block__wrap__in">
-                        <div className=" burger__block__close" onClick={() => handlerShowMenu()}>Закрыть</div>
-                        <div className=" burger__block__title"><span>Каталог</span></div>
-                        <div className=" burger__block__inner">
+                        <div className="burger__block__close" onClick={() => handlerShowMenu()}>Закрыть</div>
+                        <div className="burger__block__title"><span>Каталог</span></div>
+                        <div className="burger__block__inner">
                             <div className=" folders__block__wrap waSlideMenu-nav">
                                 <div className=" waSlideMenu-wrapper">
                                     <ul className=" menu-default top__folders waSlideMenu-menu">
-                                        <li className=" sublevel selected">
+                                        <li className="sublevel selected">
                                             <Link href="/catalog/shiny?id=4327">
                                                 <a onClick={() => {
                                                     setShowMainMenu(false)
@@ -44,20 +44,6 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <ul className="menu-default top__menu">
-                            <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
-                            <li><a href="/o-kompanii"><span>О сервисе</span></a></li>
-                            <li><a href="/aktsii"><span>Акции</span></a></li>
-                            <li><a href="/poleznoye"><span>Полезное</span></a></li>
-                            <li><a href="/servis-i-uslugi"><span>Сервис и услуги</span></a>
-                                <ul className="level-2">
-                                    <li><a href="/ob-oplate-tovara"><span>Об оплате товара</span></a></li>
-                                    <li><a href="/dostavka"><span>Доставка</span></a></li>
-                                    <li><a href="/shinomontazh"><span>Шиномонтаж</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/kontakty"><span>Контакты</span></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -101,18 +87,20 @@ const Header = () => {
                                 {/*    <a>Каталог</a>*/}
                                 {/*</span>*/}
                                 </div>
-                                <div className='header__top__center'>
-                                    <ul className="menu-default top__menu">
-                                        <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
-                                        <li><Link href="/catalog/shiny?id=16"><a><span>Шины</span></a></Link></li>
-                                        <li><Link href="/catalog/diski?id=17"><a><span>Диски</span></a></Link></li>
-                                    </ul>
-                                </div>
+
                                 <div className='header__top__right'>
                                     <span className="search__popup__btn"
                                           onClick={() => handlerShowSearchBlock()}>&nbsp;</span>
                                     <span className="cab__popup__btn">&nbsp;</span>
                                 </div>
+                            </div>
+
+                            <div className='menu-line'>
+                                <ul className="menu-default top__menu">
+                                    <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
+                                    <li><Link href="/catalog/shiny?id=16"><a><span>Шины</span></a></Link></li>
+                                    <li><Link href="/catalog/diski?id=17"><a><span>Диски</span></a></Link></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

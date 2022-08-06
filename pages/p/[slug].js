@@ -147,9 +147,9 @@ export default function ProductPage({product, upsellProducts}) {
                             </div>
 
                             <div className="shop_kind_wrap">
-                                <div className="shop_collection_header">
+                                <h2 className="shop_collection_header">
                                     Рекомендуемые товары
-                                </div>
+                                </h2>
                                 <ProductsSliderProductCard relatedProducts={upsellProducts}/>
                             </div>
                         </div>

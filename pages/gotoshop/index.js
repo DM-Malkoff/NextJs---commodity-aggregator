@@ -8,7 +8,7 @@ const GoToShop = ({prevUrl}) => {
         setTimeout(() => {
             window.location.assign(localStorage.getItem('external-link'))
             window.history.replaceState(null, null, prevUrl);
-        }, 1000)
+        }, 100000)
     }, [])
 
     return (

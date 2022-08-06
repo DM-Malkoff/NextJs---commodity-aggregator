@@ -1,10 +1,12 @@
 import Router from "next/router";
+import {partnerLink} from "../constants/config";
 
 const GoToPartner = ({url, shopName}) => {
 
     // const storeName = shopName.find(item => item.key == 'shop_name')
 
-    function goToOuterTransition(link, data){
+    function goToOuterTransition(url, data){
+        const  link = partnerLink.find(item => item.shopName == shopName).shopLink
         event.preventDefault();
         localStorage.setItem('external-link',link)
         localStorage.setItem('shopName', shopName)

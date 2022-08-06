@@ -301,3 +301,9 @@
     white-space: nowrap;
   }
 }
+
+@media screen and (max-width: 639px){
+  .search__block__wrapper{
+    display: none;
+  }
+}

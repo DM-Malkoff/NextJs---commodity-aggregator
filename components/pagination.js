@@ -19,9 +19,9 @@ const Pagination = ({typePage,totalQuantityProducts, currentSlug, currentCategor
     return (
         <div className="shop_pagelist_wrap">
             <ul className="shop_pagelist">
-                <li className={`page-prev ${currentPage == undefined ? 'not_active' : ''}`}>
+                <li className={`page-prev ${(currentPage == undefined || currentPage == 1) ? 'not_active' : ''}`}>
                     <Link href={{
-                        pathname: `/${typePage}}/${currentSlug}`,
+                        pathname: `/${typePage}/${currentSlug}`,
                         query: {
                             id: currentCategoryId,
                             page: currentPage - 1
@@ -104,7 +104,7 @@ const Pagination = ({typePage,totalQuantityProducts, currentSlug, currentCategor
                         pathname: `/${typePage}/${currentSlug}`,
                         query: {
                             id: currentCategoryId,
-                            page: currentPage + 1
+                            page: currentPage == undefined ? 2 : currentPage + 1
                         }
                     }}>
                         <a>&nbsp;</a>
@@ -112,8 +112,38 @@ const Pagination = ({typePage,totalQuantityProducts, currentSlug, currentCategor
                 </li>
             </ul>
             <ul className="pagelist_mobile menu-default">
-                <li className="page-prev not_active clone"><a href="/magazin/folder/diski">&nbsp;</a></li>
-                <li className="page-next clone"><a href="/magazin/folder/diski/p/1">&nbsp;</a></li>
+
+                <li className={`page-prev ${(currentPage == undefined || currentPage == 1) ? 'not_active' : ''}`}>
+                    {currentPage > 2 ?
+                        <Link href={{
+                            pathname: `/${typePage}/${currentSlug}`,
+                            query: {
+                                id: currentCategoryId,
+                                page: currentPage - 1
+                            }
+                        }}
+                        ><a></a></Link>
+                        :
+                        <Link href={{
+                            pathname: `/${typePage}/${currentSlug}`,
+                            query: {
+                                id: currentCategoryId
+                            }
+                        }}
+                        ><a></a></Link>
+                    }
+                </li>
+                <li className={`page-next ${currentPage == Math.ceil(totalQuantityProducts / quantityProducts) ? 'not_active' : ''}`}>
+                    <Link href={{
+                        pathname: `/${typePage}/${currentSlug}`,
+                        query: {
+                            id: currentCategoryId,
+                            page: currentPage == undefined ? 2 : currentPage + 1
+                        }
+                    }}>
+                        <a>&nbsp;</a>
+                    </Link>
+                </li>
             </ul>
         </div>
     );
