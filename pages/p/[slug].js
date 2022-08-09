@@ -12,12 +12,16 @@ import RelatedProductsSlider from "../../components/relatedProductsSlider";
 import ProductImages from "../../components/productImages";
 
 export default function ProductPage({product, upsellProducts}) {
+    console.log("product > ",product)
+
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
-    const vendor = product.meta_data.find(item => item.key === "Производитель")
-    const title = product.meta_data.find(item => item.key === "wc_title")
-    const description = product.meta_data.find(item => item.key === "wc_desctiption")
+    const vendor = customFields.find(item => item.key === "Производитель")
+    const title = customFields.find(item => item.key === "wc_title")
+    const description = customFields.find(item => item.key === "wc_desctiption")
     const shopName = customFields.find(item => item.key === 'shop_name').value
+    const shopLink = customFields.find(item => item.key === 'wc_partner_url').value
+    console.log("shopLink >> ", shopLink)
 
     const tabsItems =[
         {title: 'Характеристики', content :product.attributes},
@@ -103,8 +107,10 @@ export default function ProductPage({product, upsellProducts}) {
                                             </div>
                                             <div className="product_buttons">
                                                 <div className="product_buttons_in">
-                                                    <GoToPartner url={product.external_url}
-                                                                 shopName={shopName}/>
+                                                    <GoToPartner
+                                                        url={shopLink}
+                                                        shopName={shopName}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
