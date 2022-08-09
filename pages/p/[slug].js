@@ -4,23 +4,20 @@ import BreadCrumbs from "../../components/breadcrumbs";
 import Caption from "../../components/caption";
 import Footer from "../../components/layouts/footer";
 import Head from "next/head";
-import Image from "next/image";
 import {getProductData} from "../../utils/product";
 import GoToPartner from "../../components/goToPartner";
-import ProductsSliderProductCard from "../../components/productsSliderProductCard";
 import Link from "next/link";
-import {useState} from "react";
 import Tabs from "../../components/tabs";
+import RelatedProductsSlider from "../../components/relatedProductsSlider";
+import ProductImages from "../../components/productImages";
 
 export default function ProductPage({product, upsellProducts}) {
-    console.log('product > ', product)
-
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
-    const vendor = product.meta_data.find(item => item.key == "Производитель")
-    const title = product.meta_data.find(item => item.key == "wc_title")
-    const description = product.meta_data.find(item => item.key == "wc_desctiption")
-    const shopName = customFields.find(item => item.key == 'shop_name').value
+    const vendor = product.meta_data.find(item => item.key === "Производитель")
+    const title = product.meta_data.find(item => item.key === "wc_title")
+    const description = product.meta_data.find(item => item.key === "wc_desctiption")
+    const shopName = customFields.find(item => item.key === 'shop_name').value
 
     const tabsItems =[
         {title: 'Характеристики', content :product.attributes},
@@ -54,25 +51,16 @@ export default function ProductPage({product, upsellProducts}) {
                             />
                             <div className="product_top_wrapper">
                                 <form method="post" className="shop2-product">
-                                    <div className="product_side_l">
-                                        <div className="product_slider_wr">
+                                    <div className="product_side_l" id="product__images">
+
                                             <div className="product_labels">
                                                 <div className="product_label_item product_sale">
                                                     -{mathDiscount(product.sale_price, product.regular_price)} %
                                                 </div>
                                             </div>
-                                            <div className="product_slider">
-                                                <div className="product_image">
-                                                    <Image
-                                                        src={product.images.length ? product.images[0].src : '/images/no_image.png'}
-                                                        alt={product.name}
-                                                        title=''
-                                                        width='460'
-                                                        height='460'
-                                                    />
-                                                </div>
+                                            <div className="product_image product__gallery__images">
+                                                <ProductImages images={product.images} />
                                             </div>
-                                        </div>
                                     </div>
                                     <div className="product_side_r">
                                         <div className="product_top_block">
@@ -143,14 +131,13 @@ export default function ProductPage({product, upsellProducts}) {
                                 <div className="shop_product_tabs_wr">
                                     <Tabs items={tabsItems} />
                                 </div>
-                                <div className="shop2-clear-container"></div>
                             </div>
 
                             <div className="shop_kind_wrap">
                                 <h2 className="shop_collection_header">
                                     Рекомендуемые товары
                                 </h2>
-                                <ProductsSliderProductCard relatedProducts={upsellProducts}/>
+                                <RelatedProductsSlider relatedProducts={upsellProducts}/>
                             </div>
                         </div>
                     </main>
@@ -162,52 +149,25 @@ export default function ProductPage({product, upsellProducts}) {
 }
 
 export async function getServerSideProps(context) {
-
     const {data: product} = await getProductData(context.query.id)
-
-    const upsellProductsIds = []
     const crossSellProductsIds = []
+    const crossSellIds = []
 
-    product.upsell_ids.map((item, index) => {
-        if (index < 6) {
-            upsellProductsIds.push(item)
-        }
-    })
     product.cross_sell_ids.map((item, index) => {
-        if (index < 6) {
+        if (index < 4) {
             crossSellProductsIds.push(item)
         }
     })
 
-
-    const upsellIds = []
-    const crossSellIds = []
-
-    // for (const item of upsellProductsIds){
-    //     let {data:upsellProduct} = await getProductData(item)
-    //     upsellIds.push(upsellProduct)
-    // }
-    // for (const item of crossSellProductsIds){
-    //     let {data:crossSellProduct} = await getProductData(item)
-    //     crossSellIds.push(crossSellProduct)
-    // }
-
-    await Promise.all(upsellProductsIds.map(async (item) => {
-        let {data: upsellProduct} = await getProductData(item)
-        upsellIds.push(upsellProduct)
+    await Promise.all(crossSellProductsIds.map(async (item) => {
+        let {data: crossSellProduct} = await getProductData(item)
+        crossSellIds.push(crossSellProduct)
     }))
-
-    // await Promise.all(crossSellProductsIds.map(async (item) => {
-    //     let {data:crossSellProduct} = await getProductData(item)
-    //     crossSellIds.push(crossSellProduct)
-    // }))
 
     return {
         props: {
             product: product ?? {},
-            upsellProducts: upsellIds ?? {},
-            crossSellProducts: crossSellIds ?? {},
+            upsellProducts: crossSellIds ?? {}
         }
     }
-
 }

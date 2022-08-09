@@ -8,16 +8,16 @@ const GoToShop = ({prevUrl}) => {
         setTimeout(() => {
             window.location.assign(localStorage.getItem('external-link'))
             window.history.replaceState(null, null, prevUrl);
-        }, 100000)
+        }, 1000)
     }, [])
 
     return (
         <div className='transition-text'>
             <div className='loader'>
                 <div className="container">
-                    <div className="box1"></div>
-                    <div className="box2"></div>
-                    <div className="box3"></div>
+                    <div className="box1">&nbsp;</div>
+                    <div className="box2">&nbsp;</div>
+                    <div className="box3">&nbsp;</div>
                 </div>
             </div>
             <p>Переход на страницу магазина <strong>{shopName}</strong></p>

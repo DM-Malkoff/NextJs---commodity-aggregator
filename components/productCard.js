@@ -4,7 +4,7 @@ import GoToPartner from "./goToPartner";
 
 const ProductCard = ({productData}) => {
     const customFields = productData.meta_data
-    const shopName = customFields.find(item => item.key == 'shop_name') ? customFields.find(item => item.key == 'shop_name').value : ''
+    const shopName = customFields.find(item => item.key === 'shop_name') ? customFields.find(item => item.key === 'shop_name').value : ''
 
     function mathDiscount(salePrice, regularPrice) {
         let percent = (regularPrice - salePrice) * 100 / regularPrice
@@ -49,8 +49,7 @@ const ProductCard = ({productData}) => {
                                     <Image
                                         src={productData.images.length ? productData.images[0].src : '/images/no_image.png'}
                                         alt={productData.name}
-                                        width={200}
-                                        height={200}
+                                        layout="fill"
                                     />
                                 </a>
                             </Link>
