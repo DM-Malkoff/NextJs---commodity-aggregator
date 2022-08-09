@@ -1288,6 +1288,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     }
   }
 }
+
 .product_image_wr {
   position: relative;
   padding: 0 0 25px;
@@ -1303,6 +1304,9 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
       left: 0;
       right: 0;
       bottom: 0;
+    }
+    img{
+      object-fit: contain;
     }
   }
   .product-label {

@@ -17,13 +17,15 @@ const SearchProducts = ({searchResults}) => {
                 <meta name="robots" content="noindex, follow" />
             </Head>
             <MainLayout caption={'Поиск товаров'}>
-                <div className="search__message">По запросу <span>{searchQuery}</span> найдено {searchResults.length} товаров.</div>
-                {searchResults.length ?
-                    <ProductList products={searchResults} />:
-                    <div className="g-notice g-notice--indents">
-                        Ничего не найдено. Вы можете вернуться на  <Link href="/"><a>главную</a></Link> страницу сайта или изменить свой запрос и повторить поиск.
-                    </div>
-                }
+                <div className="search__products__list">
+                    <div className="search__message">По запросу <span>{searchQuery}</span> найдено {searchResults.length} товаров.</div>
+                    {searchResults.length ?
+                        <ProductList products={searchResults} />:
+                        <div className="g-notice g-notice--indents">
+                            Ничего не найдено. Вы можете вернуться на  <Link href="/"><a>главную</a></Link> страницу сайта или изменить свой запрос и повторить поиск.
+                        </div>
+                    }
+                </div>
             </MainLayout>
         </>
     );
