@@ -2,7 +2,6 @@ import {useState} from "react";
 import TabContent from "./tabContent";
 
 const Tabs = ({items}) => {
-
     const [active, setActive] = useState(0)
     const openTab = e => {
         setActive(+e.target.dataset.index)

@@ -6,7 +6,6 @@ const Header = () => {
     const [showMainMenu, setShowMainMenu] = useState(false)
     const [showSearchBLock, setShowSearchBlock] = useState(false)
 
-
     function handlerShowMenu() {
         setShowMainMenu(!showMainMenu)
     }

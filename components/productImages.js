@@ -8,6 +8,7 @@ const ProductImages = ({images}) => {
                 alt={images[0].name}
                 title=''
                 layout="fill"
+                priority={true}
             />
         </>
     );

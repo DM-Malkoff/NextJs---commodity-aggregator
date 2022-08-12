@@ -1,7 +1,6 @@
 import {useEffect} from "react";
 
 const GoToShop = ({prevUrl}) => {
-    console.log(prevUrl)
     const shopName = localStorage.getItem('shopName')
 
     useEffect(() => {
@@ -9,7 +8,7 @@ const GoToShop = ({prevUrl}) => {
             window.location.assign(localStorage.getItem('external-link'))
             window.history.replaceState(null, null, prevUrl);
         }, 1000)
-    }, [])
+    }, [prevUrl])
 
     return (
         <div className='transition-text'>
