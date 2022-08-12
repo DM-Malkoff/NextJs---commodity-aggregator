@@ -15,7 +15,6 @@ import {quantityProducts} from "../../constants/config";
 
 const Slug = ({products, categories, currentCategoryId}) => {
     const currentCategory = categories.find(item => item.id == currentCategoryId)
-    console.log('category info >', categories)
     const pathLocation = useRouter().asPath
     const currentPage = useRouter().query.page
     let currentPageNum = currentPage == undefined ? 0 : currentPage

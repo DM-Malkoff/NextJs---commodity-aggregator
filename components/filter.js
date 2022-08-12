@@ -40,22 +40,10 @@ export default function Filter(){
                                 <div className="filter_field_title">Производитель:</div>
                                 <div className="filter_field_body">
                                     <span data-name="s[vendor_id][]" data-value="34198661" className="param_val">
-                                        Производитель №12
+                                        Производитель №1
                                     </span>
                                     <span data-name="s[vendor_id][]" data-value="33889861" className="param_val">
                                         Производитель №2
-                                    </span>
-                                    <span data-name="s[vendor_id][]" data-value="34144461" className="param_val">
-                                        Производитель №3
-                                    </span>
-                                    <span data-name="s[vendor_id][]" data-value="34144661" className="param_val">
-                                        Производитель №5
-                                    </span>
-                                    <span data-name="s[vendor_id][]" data-value="34198461" className="param_val">
-                                        Производитель №7
-                                    </span>
-                                    <span data-name="s[vendor_id][]" data-value="34198261" className="param_val">
-                                        Производитель №8
                                     </span>
                                 </div>
                             </div>
@@ -109,8 +97,7 @@ export default function Filter(){
                                         </select>
                                         <div className="jq-selectbox__select">
                                             <div
-                                                className="jq-selectbox__select-text placeholder">Ширина
-                                                профиля
+                                                className="jq-selectbox__select-text placeholder">Ширина профиля
                                             </div>
                                             <div className="jq-selectbox__trigger">
                                                 <div className="jq-selectbox__trigger-arrow"></div>

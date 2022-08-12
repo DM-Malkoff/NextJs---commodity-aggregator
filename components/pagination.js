@@ -1,11 +1,7 @@
 import {quantityProducts} from "../constants/config";
 import Link from "next/link";
 
-const Pagination = ({typePage,totalQuantityProducts, currentSlug, currentCategoryId, currentPage}) => {
-    console.log('currentSlug >>', currentSlug)
-    console.log('currentPage >>', currentPage)
-    console.log('totalQuantityProducts >>', Math.ceil(totalQuantityProducts / quantityProducts))
-
+const Pagination = ({typePage, totalQuantityProducts, currentSlug, currentCategoryId, currentPage}) => {
     if (currentPage != undefined) {
         currentPage = +currentPage
     }
