@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {useState} from "react";
 import Image from "next/image";
+import {siteName} from "../../constants/config";
 
 const Header = () => {
     const [showMainMenu, setShowMainMenu] = useState(false)
@@ -16,36 +17,6 @@ const Header = () => {
 
     return (
         <>
-            <div className={`burger__block__wrapper${showMainMenu ? ' active' : ''}`}>
-                <div className="burger__block__wrap">
-                    <div className=" burger__block__wrap__in">
-                        <div className="burger__block__close" onClick={() => handlerShowMenu()}>Закрыть</div>
-                        <div className="burger__block__title"><span>Каталог</span></div>
-                        <div className="burger__block__inner">
-                            <div className=" folders__block__wrap waSlideMenu-nav">
-                                <div className=" waSlideMenu-wrapper">
-                                    <ul className=" menu-default top__folders waSlideMenu-menu">
-                                        <li className="sublevel selected">
-                                            <Link href="/catalog/shiny?id=4327">
-                                                <a onClick={() => {
-                                                    setShowMainMenu(false)
-                                                }}>Шины</a>
-                                            </Link>
-                                        </li>
-                                        <li className="sublevel">
-                                            <Link href="/catalog/diski?id=4328">
-                                                <a onClick={() => {
-                                                    setShowMainMenu(false)
-                                                }}>Диски</a>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div className={`search__popup__wrapper${showSearchBLock ? ' active anim' : ''}`}>
                 <div className="search__popup__wrap">
                     <span className="search__popup__close" onClick={()=> {setShowSearchBlock(false)}}>Закрыть</span>
@@ -75,9 +46,9 @@ const Header = () => {
                                 <div className='header__top__left'>
                                     <Link href='/'><a>
                                         <Image src='/images/logo.jpg'
-                                               width='160'
+                                               width='218'
                                                height='30'
-                                               alt='moscow-shiny.ru'
+                                               alt={siteName}
                                         />
                                     </a>
                                     </Link>
@@ -97,8 +68,8 @@ const Header = () => {
                             <div className='menu-line'>
                                 <ul className="menu-default top__menu">
                                     <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
-                                    <li><Link href="/catalog/shiny?id=16"><a><span>Шины</span></a></Link></li>
-                                    <li><Link href="/catalog/diski?id=17"><a><span>Диски</span></a></Link></li>
+                                    <li><Link href="/catalog/shiny?id=956"><a><span>Шины</span></a></Link></li>
+                                    <li><Link href="/catalog/diski?id=27"><a><span>Диски</span></a></Link></li>
                                 </ul>
                             </div>
                         </div>

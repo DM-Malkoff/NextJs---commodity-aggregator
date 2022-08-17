@@ -12,11 +12,13 @@ import RelatedProductsSlider from "../../components/relatedProductsSlider";
 import ProductImages from "../../components/productImages";
 
 export default function ProductPage({product, upsellProducts}) {
+    console.log("product >>", product)
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
     const vendor = customFields.find(item => item.key === "Производитель")
     const title = customFields.find(item => item.key === "wc_title")
-    const description = customFields.find(item => item.key === "wc_desctiption")
+    const description = customFields.find(item => item.key === "wc_description")
+    const sku  = product.sku
     const shopName = customFields.find(item => item.key === 'shop_name').value
     const shopLink = customFields.find(item => item.key === 'wc_partner_url').value
     const tabsItems =[
@@ -32,9 +34,9 @@ export default function ProductPage({product, upsellProducts}) {
     return (
         <>
             <Head>
-                <title>{title ? title.value : `${product.name} купить в Интернет-магазине с доставкой недорого`}</title>
+                <title>{`${sku} ${product.name} купить в Интернет-магазине с доставкой недорого`}</title>
                 <meta name="description"
-                      content={description ? description.value : `${product.name} купить в Интернет-магазине с доставкой по России всего за ${product.price} руб. Производитель ${vendor.value}. Артикул ${product.sku} `}/>
+                      content={description ? description.value : `${product.name} купить в Интернет-магазине с доставкой по России всего за ${product.price} руб. Производитель ${vendor.value}. Артикул ${sku} `}/>
             </Head>
             <Header/>
             <div className='site__container product'>
@@ -74,7 +76,7 @@ export default function ProductPage({product, upsellProducts}) {
                                                 <Caption caption={product.name}/>
                                             </div>
                                             <div className="vendor_option">
-                                                {/*Производитель {vendor.value}*/}
+                                                Артикул {sku}
                                             </div>
                                         </div>
                                         <div className="product_bot_block">

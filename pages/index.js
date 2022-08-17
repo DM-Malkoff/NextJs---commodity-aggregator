@@ -8,8 +8,7 @@ import {quantityProductsMainSlider} from "../constants/config";
 import 'swiper/css';
 import MainSlider from "../components/mainSlider";
 
-function Home({productsTires, productsDiscs}) {
-
+function Home({productsTires, productsDiscs, categories}) {
     return (
         <>
             <Head>
@@ -21,9 +20,7 @@ function Home({productsTires, productsDiscs}) {
             <Header/>
             <div className='site__container'>
                 <SearchBlock/>
-
-                {/*<PopularProductsSlider data={productsTires} caption={'Популярные шины'}/>*/}
-                {/*<PopularProductsSlider data={productsDiscs} caption={'Популярные диски'}/>*/}
+                <p>для Admitad - 17.08.2022</p>
                 <MainSlider data={productsTires} caption={'Популярные шины'} />
                 <MainSlider data={productsDiscs} caption={'Популярные диски'} />
 
@@ -46,8 +43,8 @@ function Home({productsTires, productsDiscs}) {
 export default Home;
 
 export async function getServerSideProps() {
-    const {data: productsTires} = await getProductsData(16, 1, quantityProductsMainSlider);
-    const {data: productsDiscs} = await getProductsData(17, 1, quantityProductsMainSlider);
+    const {data: productsTires} = await getProductsData(956, 1, quantityProductsMainSlider);
+    const {data: productsDiscs} = await getProductsData(27, 1, quantityProductsMainSlider);
     const {data: categories} = await getCategories();
     return {
         props: {
