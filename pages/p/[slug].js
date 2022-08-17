@@ -79,7 +79,7 @@ export default function ProductPage({product, upsellProducts}) {
                                                     Добавить к сравнению
                                                 </label>
                                             </div>
-                                            <div className="product_name">
+                                            <div className="product_name" itemProp="name">
                                                 <Caption caption={product.name}/>
                                             </div>
                                             <div className="vendor_option">

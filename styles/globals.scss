@@ -211,34 +211,37 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
           text-align: center;
           margin-bottom: 10px;
           white-space: pre-wrap;
-          a {
+          ul li{
             display: inline-block;
-            vertical-align: top;
-            margin: 0 10px 5px 0;
+            a {
+              display: inline-block;
+              vertical-align: top;
+              margin: 0 10px 5px 0;
+              span {
+                font-size: 13px;
+                color: #706a6e;
+                background: none;
+                padding: 5px 15px 6px;
+                border-radius: 3px;
+                transition: all 0.3s;
+                box-shadow: inset 0 0 0 1px #dcdcdc;
+                line-height: normal;
+              }
+              &:hover span {
+                background: #fff;
+                box-shadow: none;
+              }
+            }
             span {
-              font-size: 13px;
+              display: inline-block;
+              vertical-align: top;
               color: #706a6e;
-              background: none;
+              font-size: 13px;
+              background: #eee;
               padding: 5px 15px 6px;
               border-radius: 3px;
-              transition: all 0.3s;
-              box-shadow: inset 0 0 0 1px #dcdcdc;
               line-height: normal;
             }
-            &:hover span {
-              background: #fff;
-              box-shadow: none;
-            }
-          }
-          span {
-            display: inline-block;
-            vertical-align: top;
-            color: #706a6e;
-            font-size: 13px;
-            background: #eee;
-            padding: 5px 15px 6px;
-            border-radius: 3px;
-            line-height: normal;
           }
         }
         .mode_folder_wrapper{
