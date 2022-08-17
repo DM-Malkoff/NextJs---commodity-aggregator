@@ -10,6 +10,7 @@ import Link from "next/link";
 import Tabs from "../../components/tabs";
 import RelatedProductsSlider from "../../components/relatedProductsSlider";
 import ProductImages from "../../components/productImages";
+import {siteName, siteUrl} from "../../constants/config";
 
 export default function ProductPage({product, upsellProducts}) {
     console.log("product >>", product)
@@ -37,6 +38,13 @@ export default function ProductPage({product, upsellProducts}) {
                 <title>{`${sku} ${product.name} купить в Интернет-магазине с доставкой недорого`}</title>
                 <meta name="description"
                       content={description ? description.value : `${product.name} купить в Интернет-магазине с доставкой по России всего за ${product.price} руб. Производитель ${vendor.value}. Артикул ${sku} `}/>
+                <meta property="og:title" content={`${sku} ${product.name} купить в Интернет-магазине с доставкой недорого`}/>
+                {product.images.map(item =>
+                    <meta key={item.id} property="og:image" content={item.src}/>
+                )}
+                <meta property="og:url" content= {siteUrl + useRouter().asPath} />
+                <meta property="og:site_name" content= {siteName} />
+                <meta property="og:type" content="website" />
             </Head>
             <Header/>
             <div className='site__container product'>
@@ -51,10 +59,9 @@ export default function ProductPage({product, upsellProducts}) {
                                 parentCategoryUrl={`${product.categories[0].slug}` + '?id=' + `${product.categories[0].id}`}
 
                             />
-                            <div className="product_top_wrapper">
+                            <div className="product_top_wrapper" itemScope itemType="http://schema.org/Product">
                                 <form method="post" className="shop2-product">
                                     <div className="product_side_l" id="product__images">
-
                                             <div className="product_labels">
                                                 <div className="product_label_item product_sale">
                                                     -{mathDiscount(product.sale_price, product.regular_price)} %
@@ -95,12 +102,15 @@ export default function ProductPage({product, upsellProducts}) {
                                                     })}
                                                 </div>
                                             </div>
-                                            <div className="product-price">
+                                            <div className="product-price" itemProp="offers" itemScope itemType="http://schema.org/Offer">
                                                 <div className="price-old question">
                                                     <span><strong>{product.regular_price}</strong> руб.</span>
                                                 </div>
                                                 <div className="price-current">
                                                     <strong>{product.price}</strong> руб.
+                                                    <meta itemProp="price" content={product.price} />
+                                                    <meta itemProp="priceCurrency" content="RUB" />
+                                                    <link itemProp="availability" href="http://schema.org/InStock" />
                                                 </div>
                                             </div>
                                             <div className="product_buttons">

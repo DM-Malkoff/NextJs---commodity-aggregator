@@ -4,23 +4,30 @@ import SearchBlock from "../components/searchBlock";
 import {getProductsData} from "../utils/products";
 import Footer from "../components/layouts/footer";
 import {getCategories} from "../utils/categories";
-import {quantityProductsMainSlider} from "../constants/config";
+import {quantityProductsMainSlider, siteName, siteUrl} from "../constants/config";
 import 'swiper/css';
 import MainSlider from "../components/mainSlider";
+import {useRouter} from "next/router";
 
 function Home({productsTires, productsDiscs, categories}) {
     return (
         <>
             <Head>
-                <title>Купить шины в Москве — недорого, зимние и летние со склада</title>
-                <meta name="description" content="Наш сервис предоставляет возможность купить недорого шины в Москве в популярных Интернет-магазинах. Распродажа зимних и летних автошин со склада в г. Москва на выгодных условиях: скидки от 10%, рассрочка 0%, кредит."/>
+                <title>Колёса-шины-диски.ру - тысячи товаров известных Магазинов в одном месте.</title>
+                <meta name="description" content="Наш сервис предоставляет возможность купить недорого шины в популярных Интернет-магазинах. Распродажа зимних и летних автошин со склада в на выгодных условиях: скидки от 10%, рассрочка 0%, кредит."/>
                 <meta name="verify-advertiseru" content="d64bb6aeb3" />
                 <meta name="verify-admitad" content="8adf54dd2a" />
+                <meta name="yandex-verification" content="7f8011489a539e5f" />
+
+                <meta property="og:title" content="Колёса-шины-диски.ру - тысячи товаров известных Магазинов в одном месте."/>
+                <meta property="og:image" content="/images/logo.jpg" />
+                <meta property="og:url" content= {siteUrl} />
+                <meta property="og:site_name" content= {siteName} />
+                <meta property="og:type" content="website" />
             </Head>
             <Header/>
             <div className='site__container'>
                 <SearchBlock/>
-                <p>для Admitad - 17.08.2022</p>
                 <MainSlider data={productsTires} caption={'Популярные шины'} />
                 <MainSlider data={productsDiscs} caption={'Популярные диски'} />
 

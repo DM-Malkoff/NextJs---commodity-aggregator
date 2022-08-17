@@ -19,7 +19,7 @@ const Tabs = ({items}) => {
                     )
                 })}
             </ul>
-            {items[active] && <TabContent className='her' {...items[active]} tabIndex={active}/>}
+            {items[active] && <TabContent {...items[active]} tabIndex={active}/>}
         </div>
     );
 };

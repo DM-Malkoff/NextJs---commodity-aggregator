@@ -1,4 +1,5 @@
-export const siteName = "kolesa-shiny-diski.ru"
+export const siteName = 'kolesa-shiny-diski.ru'
+export const siteUrl = 'https://kolesa-shiny-diski.ru'
 
 export const quantityProducts = 21 // количество товаров на странице категории
 export const visibleSliderProducts = 4 // количество видимых товаров в 1 слайде слайдера похожих товаров

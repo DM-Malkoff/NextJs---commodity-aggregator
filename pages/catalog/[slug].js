@@ -11,7 +11,7 @@ import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
-import {quantityProducts} from "../../constants/config";
+import {quantityProducts, siteName, siteUrl} from "../../constants/config";
 
 const Slug = ({products, categories, currentCategoryId}) => {
     const currentCategory = categories.find(item => item.id == currentCategoryId)
@@ -31,6 +31,11 @@ const Slug = ({products, categories, currentCategoryId}) => {
                 <meta name="description"
                       content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
                 {Towns[currentPageNum] ? true : <meta name="robots" content="noindex, nofollow"/>}
+                <meta property="og:title" content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
+                <meta property="og:image" content="/images/logo.jpg" />
+                <meta property="og:url" content= {siteUrl + useRouter().asPath} />
+                <meta property="og:site_name" content= {siteName} />
+                <meta property="og:type" content="website" />
             </Head>
             <Header/>
             <div className='site__container'>

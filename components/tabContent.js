@@ -11,7 +11,7 @@ const TabContent = ({title, content, tabIndex}) => {
                             </div>
                         )
                     })}
-                    {tabIndex === 1 ? <div dangerouslySetInnerHTML={{__html: content}}/> : false}
+                    {tabIndex === 1 ? <div itemProp="description" dangerouslySetInnerHTML={{__html: content}}/> : false}
                 </div>
                 <div className="shop2-clear-container"></div>
             </div>
