@@ -13,7 +13,6 @@ import ProductImages from "../../components/productImages";
 import {siteName, siteUrl} from "../../constants/config";
 
 export default function ProductPage({product, upsellProducts}) {
-    console.log("product >>", product)
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
     const vendor = customFields.find(item => item.key === "Производитель")

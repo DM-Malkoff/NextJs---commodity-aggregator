@@ -6,7 +6,6 @@ import Head from "next/head";
 import Link from "next/link";
 
 const SearchProducts = ({searchResults}) => {
-    console.log("SearchResults Length >> ", searchResults.length)
     const searchQuery = useRouter().query.id
 
     return (
