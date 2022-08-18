@@ -27,7 +27,7 @@ const Sort = () => {
         } else {
             setSelectedSortType('clear')
         }
-    },router.query.order)
+    },[router.query.order])
 
     const sortHandler = () => {
         setSortCLick(!sortClick)
