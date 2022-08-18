@@ -30,12 +30,14 @@ const Slug = ({products, categories, currentCategoryId}) => {
                 <title>Купить {currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого</title>
                 <meta name="description"
                       content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
-                {Towns[currentPageNum] ? true : <meta name="robots" content="noindex, nofollow"/>}
-                <meta property="og:title" content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
-                <meta property="og:image" content="/images/logo.jpg" />
-                <meta property="og:url" content= {siteUrl + useRouter().asPath} />
-                <meta property="og:site_name" content= {siteName} />
-                <meta property="og:type" content="website" />
+                {Towns[currentPageNum] ? true : <meta name="robots" content="none"/>}
+                {useRouter().query.sort ?<meta name="robots" content="none"/> : false}
+                <meta property="og:title"
+                      content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
+                <meta property="og:image" content="/images/logo.jpg"/>
+                <meta property="og:url" content={siteUrl + useRouter().asPath}/>
+                <meta property="og:site_name" content={siteName}/>
+                <meta property="og:type" content="website"/>
             </Head>
             <Header/>
             <div className='site__container'>
@@ -70,8 +72,9 @@ const Slug = ({products, categories, currentCategoryId}) => {
 export default Slug;
 
 export async function getServerSideProps(ctx) {
+    console.log("2222",ctx)
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(ctx.query.id, ctx.query.page, quantityProducts);
+    const {data: products} = await getProductsData(ctx.query.id, ctx.query.page, quantityProducts, ctx.query.orderby, ctx.query.order);
 
     return {
         props: {

@@ -55,23 +55,37 @@ const ProductCard = ({productData}) => {
                                 </a>
                             </Link>
                         </div>
-                        <div className="product-label">
-                            <div className="product_label_item product-sale">
-                                -{mathDiscount(productData.sale_price, productData.regular_price)} %
+                        {(productData.sale_price && productData.regular_price) ?
+                            <div className="product-label">
+                                <div className="product_label_item product-sale">
+                                    -{mathDiscount(productData.sale_price, productData.regular_price)} %
+                                </div>
                             </div>
-                        </div>
+                            :
+                            false
+                        }
                     </div>
 
                     <div className="product-bot">
-                        <div className="product-price">
-                            <div className="price-old question">
-                                <span><strong>{productData.regular_price}</strong>руб.</span>
-                            </div>
-                            <div className="price-current">
-                                <strong>{productData.sale_price}</strong> руб.
-                            </div>
-                        </div>
-                        <GoToPartner url={shopLink} shopName={shopName}/>
+                        {productData.sale_price ?
+                            <>
+                                <div className="product-price">
+                                    {productData.regular_price > 0 ?
+                                        <div className="price-old question">
+                                            <span><strong>{productData.regular_price}</strong>руб.</span>
+                                        </div>
+                                        :
+                                        false
+                                    }
+                                    <div className="price-current">
+                                        <strong>{productData.sale_price}</strong> руб.
+                                    </div>
+                                </div>
+                                <GoToPartner url={shopLink} shopName={shopName}/>
+                            </>
+                            :
+                            <span className="not_available">Нет в наличии</span>
+                        }
                     </div>
 
                 </div>
