@@ -31,7 +31,8 @@ const Slug = ({products, categories, currentCategoryId}) => {
                 <meta name="description"
                       content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
                 {Towns[currentPageNum] ? true : <meta name="robots" content="none"/>}
-                {useRouter().query.sort ?<meta name="robots" content="none"/> : false}
+                {useRouter().query.orderby  ?<meta name="robots" content="none"/> : false}
+
                 <meta property="og:title"
                       content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
                 <meta property="og:image" content="/images/logo.jpg"/>
