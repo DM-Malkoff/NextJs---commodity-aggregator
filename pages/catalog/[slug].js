@@ -6,14 +6,16 @@ import Head from "next/head";
 import Header from "../../components/layouts/header";
 import BreadCrumbs from "../../components/breadcrumbs";
 import Caption from "../../components/caption";
-import Filter from "../../components/filter";
+import Filter from "../../components/filter/filter";
 import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
 import {quantityProducts, siteName, siteUrl} from "../../constants/config";
+import {getAttributes} from "../../utils/attributes";
 
-const Slug = ({products, categories, currentCategoryId}) => {
+const Slug = ({products, categories, attributes, currentCategoryId}) => {
+    console.log("attributes >> ",attributes)
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     const pathLocation = useRouter().asPath
     const currentPage = useRouter().query.page
@@ -73,13 +75,20 @@ const Slug = ({products, categories, currentCategoryId}) => {
 export default Slug;
 
 export async function getServerSideProps(ctx) {
-    console.log("2222",ctx)
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(ctx.query.id, ctx.query.page, quantityProducts, ctx.query.orderby, ctx.query.order);
+    const {data: attributes} = await getAttributes();
+    const {data: products} = await getProductsData(
+        ctx.query.id,
+        ctx.query.page,
+        quantityProducts,
+        ctx.query.orderby,
+        ctx.query.order
+    );
 
     return {
         props: {
             categories: categories ?? {},
+            attributes: attributes ?? {},
             products: products ?? {},
             currentCategoryId: ctx.query.id
         }

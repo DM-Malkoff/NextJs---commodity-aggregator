@@ -1,6 +1,6 @@
 import Header from './header'
 import Footer from './footer'
-import Filter from "../filter";
+import Filter from "../filter/filter";
 import BreadCrumbs from "../breadcrumbs";
 import Caption from "../caption";
 import {useRouter} from "next/router";

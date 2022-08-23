@@ -35,7 +35,7 @@ function Home({productsTires, productsDiscs, categories}) {
                     <div className="text__block__wrap">
                         <div className="block__title"><h1>Автомобильные шины, диски и аксессуары</h1></div>
                         <div className="block__body">
-                            <p>Moscow-shiny.ru - не просто Интернет-магазин. У нас Вы сможете с легкостью найти шины или
+                            <p>{siteName} - не просто Интернет-магазин. У нас Вы сможете с легкостью найти шины или
                                 диски по нужным Вам характеристикам и ценам в популярных Интернет-магазинах и всё это не выходя из дома.</p>
                         </div>
                     </div>
