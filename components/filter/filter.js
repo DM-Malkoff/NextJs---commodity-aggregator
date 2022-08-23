@@ -5,10 +5,12 @@ export default function Filter(){
 
     const filterContent = [
         {
+            id: 1,
             title: 'Цена: (руб.)',
             type: 'price',
         },
         {
+            id: 2,
             title: 'Производитель:',
             content:
                 <>
@@ -17,7 +19,7 @@ export default function Filter(){
                 </>
 
         },
-        {
+        {   id: 3,
             title: 'Сезон: ',
             content:
                 <>
@@ -28,6 +30,7 @@ export default function Filter(){
                 </>
         },
         {
+            id:4,
             title: 'Тип автомобиля:',
             content:
                 <>

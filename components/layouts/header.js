@@ -70,7 +70,7 @@ const Header = () => {
                                     <li className="opened active"><Link href="/"><a><span>Главная</span></a></Link></li>
                                     <li><Link href="/catalog/diski?id=27"><a><span>Диски</span></a></Link></li>
                                     <li><Link href="/catalog/shiny?id=956"><a><span>Шины</span></a></Link></li>
-                                    <li><Link href="/catalog/shiny?id=4741"><a><span>Мотошины</span></a></Link></li>
+                                    <li><Link href="/catalog/motoshiny?id=4741"><a><span>Мотошины</span></a></Link></li>
                                 </ul>
                             </div>
                         </div>
