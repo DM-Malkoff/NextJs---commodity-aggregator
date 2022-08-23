@@ -15,10 +15,13 @@ import {quantityProducts, siteName, siteUrl} from "../../constants/config";
 import {getAttributes} from "../../utils/attributes";
 
 const Slug = ({products, categories, attributes, currentCategoryId}) => {
-    console.log("attributes >> ",attributes)
+    console.log("attributes >> ", attributes)
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     const pathLocation = useRouter().asPath
     const currentPage = useRouter().query.page
+    const currentSlug = useRouter().query.slug
+
+    const availableSlug = categories.find(item => item.id == currentCategoryId).slug
     let currentPageNum = currentPage == undefined ? 0 : currentPage
 
     let townCaption = currentCategory.name
@@ -33,7 +36,7 @@ const Slug = ({products, categories, attributes, currentCategoryId}) => {
                 <meta name="description"
                       content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
                 {Towns[currentPageNum] ? true : <meta name="robots" content="none"/>}
-                {useRouter().query.orderby  ?<meta name="robots" content="none"/> : false}
+                {useRouter().query.orderby || currentSlug != availableSlug ? <meta name="robots" content="none"/> : false}
 
                 <meta property="og:title"
                       content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
