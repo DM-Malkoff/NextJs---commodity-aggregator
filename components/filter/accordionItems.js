@@ -1,17 +1,34 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {Context} from "../../context/context";
+import {useRouter} from "next/router";
 
-const AccordionItems = ({item, index}) => {
-    const [minPrice, setMinPrice] = useState(0)
-    const [maxPrice, setMaxPrice] = useState(0)
+const AccordionItems = ({item, index, onPress}) => {
+    const router = useRouter()
+    const minPriceValue = router.query.min_price ? router.query.min_price: 'от'
+    const maxPriceValue = router.query.max_price ? router.query.max_price: 'до'
+
+    const [filterContext, setFilterContext] = useContext(Context)
+
+    const [filterOptions, setFilterOptions] = useState({})
 
     const [isShow, setIsShow] = useState(index == 0 ? true : false)
+    const [searchClick,setSearchClick] = useState(false)
 
     function itemClick() {
         setIsShow(!isShow)
     }
-    useEffect(()=>{
-        console.log(minPrice)
-    },[minPrice])
+
+    useEffect(() => {
+        setFilterContext(filterOptions,searchClick)
+    }, [filterOptions,searchClick])
+
+    function handlerMinPrice(event) {
+        setFilterOptions({...filterOptions, min_price: event.target.value})
+    }
+
+    function handlerMaxPrice(event) {
+        setFilterOptions({...filterOptions, max_price: event.target.value})
+    }
 
     return (
         <div className={`shop_filter_field ${isShow ? 'active' : ''}`} onClick={itemClick}>
@@ -21,15 +38,34 @@ const AccordionItems = ({item, index}) => {
                     {item.type == 'price' ?
                         <>
                             <div className="input_from">
-                                <input placeholder="от" className="shop2-input-float" type="text"
-                                       onChange={(event) => setMinPrice(event.target.value)}
-                                       onClick={(event) => {event.stopPropagation()}}
+                                <input
+                                    placeholder={minPriceValue}
+
+                                    type="number"
+                                    onChange={handlerMinPrice}
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+                                    }}
+                                    onKeyPress={(event) => {
+                                        if (event.key === 'Enter'){
+                                            onPress()
+                                        }
+                                    }}
                                 />
                             </div>
                             <div className="input_to">
-                                <input placeholder="до" type="text"
-                                       onChange={(event) => setMaxPrice(event.target.value)}
-                                       onClick={(event) => {event.stopPropagation()}}
+                                <input
+                                    placeholder={maxPriceValue}
+                                    type="number"
+                                    onChange={handlerMaxPrice}
+                                    onClick={(event) => {
+                                       event.stopPropagation()
+                                    }}
+                                    onKeyPress={(event) => {
+                                        if (event.key === 'Enter'){
+                                            onPress()
+                                        }
+                                    }}
                                 />
                             </div>
                         </>

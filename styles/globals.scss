@@ -211,36 +211,39 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
           text-align: center;
           margin-bottom: 10px;
           white-space: pre-wrap;
-          ul li{
-            display: inline-block;
-            a {
+          ul{
+            padding-inline-start: 0;
+            li{
               display: inline-block;
-              vertical-align: top;
-              margin: 0 10px 5px 0;
+              a {
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 10px 5px 0;
+                span {
+                  font-size: 13px;
+                  color: #706a6e;
+                  background: none;
+                  padding: 5px 15px 6px;
+                  border-radius: 3px;
+                  transition: all 0.3s;
+                  box-shadow: inset 0 0 0 1px #dcdcdc;
+                  line-height: normal;
+                }
+                &:hover span {
+                  background: #fff;
+                  box-shadow: none;
+                }
+              }
               span {
-                font-size: 13px;
+                display: inline-block;
+                vertical-align: top;
                 color: #706a6e;
-                background: none;
+                font-size: 13px;
+                background: #eee;
                 padding: 5px 15px 6px;
                 border-radius: 3px;
-                transition: all 0.3s;
-                box-shadow: inset 0 0 0 1px #dcdcdc;
                 line-height: normal;
               }
-              &:hover span {
-                background: #fff;
-                box-shadow: none;
-              }
-            }
-            span {
-              display: inline-block;
-              vertical-align: top;
-              color: #706a6e;
-              font-size: 13px;
-              background: #eee;
-              padding: 5px 15px 6px;
-              border-radius: 3px;
-              line-height: normal;
             }
           }
         }
@@ -375,7 +378,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
                     transition-property: opacity, transform;
                   }
                 }
-                input[type="text"] {
+                input[type="text"],input[type="number"] {
                   color: #2c262a;
                   width: 100%;
                   border: none;
@@ -441,6 +444,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
                       box-shadow: inset 0 0 0 1px #dfdfdf;
                       &:hover{
                         background: #efefef;
+                        cursor: pointer;
                       }
                     }
                   }
@@ -451,6 +455,10 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
           .mode_folder_body {
             width: calc(100% - 355px);
             flex: 1 1 auto;
+            .products_error{
+              text-align: center;
+              padding-top: 20px;
+            }
           }
         }
         .product_top_wrapper {
@@ -1842,7 +1850,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     padding: 0 0 33px;
   }
   .search__form{
-    input[type="text"] {
+    input[type="text"],input[type="number"] {
       color: #22202a;
       width: calc(100% - 109px - 20px);
       height: 54px;
@@ -1882,10 +1890,10 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     }
   }
 }
-.search__popup__wrapper.active.anim .search__popup__wrap {
+.search__popup__wrapper.active .search__popup__wrap {
   transform: translate(0, 0);
 }
-.search__popup__wrapper.anim {
+.search__popup__wrapper.active {
   opacity: 1;
   visibility: visible;
 }
@@ -2060,7 +2068,10 @@ a {
         border: none;
       }
     }
-
+  }
+  .total_qnt_products{
+    padding: 21px 30px 21px 10px;
+    color: #aaa;
   }
   .filter_popup_btn_wr {
     display: none;

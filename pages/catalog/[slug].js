@@ -15,11 +15,11 @@ import {quantityProducts, siteName, siteUrl} from "../../constants/config";
 import {getAttributes} from "../../utils/attributes";
 
 const Slug = ({products, categories, attributes, currentCategoryId}) => {
-    console.log("attributes >> ", attributes)
+    // console.log("attributes >> ", attributes)
+    const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
-    const pathLocation = useRouter().asPath
-    const currentPage = useRouter().query.page
-    const currentSlug = useRouter().query.slug
+    const currentPage = router.query.page
+    const currentSlug = router.query.slug
 
     const availableSlug = categories.find(item => item.id == currentCategoryId).slug
     let currentPageNum = currentPage == undefined ? 0 : currentPage
@@ -36,10 +36,19 @@ const Slug = ({products, categories, attributes, currentCategoryId}) => {
                 <meta name="description"
                       content={`${currentCategory.name} - большой ассортимент в нашем каталоге. Доставка в ${Towns[currentPageNum]}. Онлайн оформление заказа. Гарантия от магазина и выгодные цены.`}/>
                 {Towns[currentPageNum] ? true : <meta name="robots" content="none"/>}
-                {useRouter().query.orderby || currentSlug != availableSlug ? <meta name="robots" content="none"/> : false}
+                {
+                    router.query.orderby ||
+                    router.query.min_price ||
+                    router.query.max_price ||
+                    currentSlug != availableSlug
+                        ?
+                        <meta name="robots" content="none"/>
+                        :
+                        false
+                }
 
                 <meta property="og:title"
-                      content={`Купить ${currentCategory.name} в {Towns[currentPageNum]} в Интернет-магазине недорого`}/>
+                      content={`Купить ${currentCategory.name} в ${Towns[currentPageNum]} в Интернет-магазине недорого`}/>
                 <meta property="og:image" content="/images/logo.jpg"/>
                 <meta property="og:url" content={siteUrl + useRouter().asPath}/>
                 <meta property="og:site_name" content={siteName}/>
@@ -50,20 +59,26 @@ const Slug = ({products, categories, attributes, currentCategoryId}) => {
                 <div className='site__main__wrap folder'>
                     <main role="main" className="site__main folder">
                         <div className="site__main__in">
-                            <BreadCrumbs path={pathLocation} namePage={currentCategory.name}/>
+                            <BreadCrumbs namePage={currentCategory.name}/>
                             <Caption caption={townCaption}/>
                             <div className="mode_folder_wrapper">
                                 <Filter/>
                                 <div className="mode_folder_body">
-                                    <Sort/>
-                                    <ProductList products={products}/>
-                                    <Pagination
-                                        totalQuantityProducts={currentCategory.count}
-                                        currentSlug={currentCategory.slug}
-                                        currentCategoryId={currentCategoryId}
-                                        currentPage={currentPage}
-                                        typePage={'catalog'}
-                                    />
+                                    <Sort totalQuantityProducts={currentCategory.count}
+                                          quantityFilterProduct={products.length}/>
+                                    {products.length == 0 ?
+                                        <p className="products_error">Не найдено товаров по заданным параметрам,
+                                            попробуйте изменить условия поиска.</p> :
+                                        <ProductList products={products}/>
+                                    }
+                                    {products.length >= quantityProducts || router.query.page ?
+                                        <Pagination
+                                            totalQuantityProducts={currentCategory.count}
+                                            productsLength={products.length}
+                                        />
+                                        :
+                                        false
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -81,6 +96,7 @@ export async function getServerSideProps(ctx) {
     const {data: categories} = await getCategories();
     const {data: attributes} = await getAttributes();
     const {data: products} = await getProductsData(
+        ctx.query,
         ctx.query.id,
         ctx.query.page,
         quantityProducts,

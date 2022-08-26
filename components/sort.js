@@ -1,8 +1,11 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {quantityProducts} from "../constants/config";
 
-const Sort = () => {
+const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
     const router = useRouter()
+    const {slug: _, ...routerQueries} = router.query
+    const {order:__,orderby:___, ...routerQueriesWithoutSort} = routerQueries
     const [sortClick, setSortCLick] = useState(false)
     const [sortTitle, setSortTitle] = useState('Сортировать по')
     const [selectedSortType, setSelectedSortType] = useState('')
@@ -40,7 +43,7 @@ const Sort = () => {
             router.push({
                 pathname: router.query.slug,
                 query: {
-                    id: router.query.id
+                    ...routerQueriesWithoutSort,
                 }
             })
             setSortTitle('Сортировать по')
@@ -48,7 +51,7 @@ const Sort = () => {
             router.push({
                 pathname: router.query.slug,
                 query: {
-                    id: router.query.id,
+                    ...routerQueries,
                     orderby: sortName,
                     order: sortType
                 }
@@ -83,6 +86,8 @@ const Sort = () => {
             <div className="filter_popup_btn_wr">
                 <div className="filter_popup_btn"><span>Фильтр</span></div>
             </div>
+
+            <div className="total_qnt_products">{Object.keys(router.query).length > 1 && quantityFilterProduct && router.query.page !== undefined >= quantityProducts ? '': `Найдено ${quantityFilterProduct >= quantityProducts ? totalQuantityProducts:quantityFilterProduct} товаров`}</div>
         </div>
     );
 };
