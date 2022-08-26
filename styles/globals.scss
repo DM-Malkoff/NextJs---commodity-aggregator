@@ -2104,6 +2104,25 @@ a {
 //.swiper{
 //  padding: 15px !important;
 //}
+#nprogress{
+  .bar{
+    background: #fd9844;
+    height: 3px;
+  }
+  .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px #fd9844, 0 0 5px #fd9844;
+    opacity: 1.0;
+
+    -webkit-transform: rotate(3deg) translate(0px, -4px);
+    -ms-transform: rotate(3deg) translate(0px, -4px);
+    transform: rotate(3deg) translate(0px, -4px);
+  }
+}
 
 //Key-frames
 @keyframes toggleHide {
@@ -2314,6 +2333,9 @@ a {
   }
   .shop_sorting_panel {
     flex-direction: column;
+    .total_qnt_products{
+      display: none;
+    }
   }
   .filter_popup_btn {
     display: block!important;
