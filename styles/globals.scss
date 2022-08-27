@@ -674,7 +674,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
                 }
                 .links{
                   a{
-                    background-color: #ffc555;
+                    background-color: aliceblue;
                     padding: 5px 10px;
                     border-radius: 3px;
                     margin: 0 5px 0 0;
@@ -2108,6 +2108,11 @@ a {
   .bar{
     background: #fd9844;
     height: 3px;
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
   .peg {
     display: block;
@@ -2122,7 +2127,48 @@ a {
     -ms-transform: rotate(3deg) translate(0px, -4px);
     transform: rotate(3deg) translate(0px, -4px);
   }
+  .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 15px;
+    right: 15px;
+  }
+  .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+
+    border: solid 2px transparent;
+    border-top-color: #fd9844;
+    border-left-color: #fd9844;
+    border-radius: 50%;
+
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+    animation: nprogress-spinner 400ms linear infinite;
+  }
 }
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 
 //Key-frames
 @keyframes toggleHide {
@@ -2400,9 +2446,14 @@ a {
     padding: 0 20px 40px!important;
     overflow: hidden;
   }
-  .product_buttons .product_buttons_in .shop_product_button{
-    text-align: center;
-    width: 100% !important;
+  .product_buttons{
+    .product_buttons_in{
+      .shop_product_button{
+        text-align: center;
+        width: 100% !important;
+        box-sizing: border-box;
+      }
+    }
   }
   .shop_product_data {
     padding: 20px!important;
