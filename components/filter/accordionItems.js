@@ -12,15 +12,15 @@ const AccordionItems = ({item, index, onPress}) => {
     const [filterOptions, setFilterOptions] = useState({})
 
     const [isShow, setIsShow] = useState(index == 0 ? true : false)
-    const [searchClick,setSearchClick] = useState(false)
+    // const [searchClick,setSearchClick] = useState(false)
 
     function itemClick() {
         setIsShow(!isShow)
     }
 
     useEffect(() => {
-        setFilterContext(filterOptions,searchClick)
-    }, [filterOptions,searchClick])
+        setFilterContext(filterOptions)
+    }, [filterOptions])
 
     function handlerMinPrice(event) {
         setFilterOptions({...filterOptions, min_price: event.target.value})

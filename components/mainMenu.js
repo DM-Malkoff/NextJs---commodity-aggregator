@@ -3,12 +3,16 @@ import {menuCategories} from "../constants/config";
 import {useEffect, useRef, useState} from "react";
 
 
-const MainMenu = ({showMenu, handler,}) => {
+const MainMenu = ({showMenu, handler}) => {
     const [showSubMenu, setShowSubMenu] = useState(false)
 
     const clickSubMenu = (e) => {
         e.preventDefault()
         setShowSubMenu(true)
+    }
+    const subMenuClickHandler = () => {
+        handler()
+        setShowSubMenu(false)
     }
 
     const [menuBlockHeight, setMenuBlockHeight] = useState(0)
@@ -41,7 +45,7 @@ const MainMenu = ({showMenu, handler,}) => {
                                                             id: item.id
                                                         }
                                                     }}>
-                                                        <a className="has_sublayer" onClick={subLevel.length ? clickSubMenu:''}>
+                                                        <a className="has_sublayer" onClick={subLevel.length ? clickSubMenu:handler}>
                                                             {item.name}
                                                             {subLevel.length ?
                                                                 <span>&nbsp;</span>
@@ -62,7 +66,7 @@ const MainMenu = ({showMenu, handler,}) => {
                                                                         id: item.id
                                                                     }
                                                                 }}>
-                                                                    <a>{item.name}</a>
+                                                                    <a onClick={() => subMenuClickHandler()}>{item.name}</a>
                                                                 </Link>
                                                             </li>
                                                             {subLevel.map((item) => {
@@ -74,7 +78,7 @@ const MainMenu = ({showMenu, handler,}) => {
                                                                                 id: item.id
                                                                             }
                                                                         }}>
-                                                                            <a>{item.name}</a>
+                                                                            <a onClick={() => subMenuClickHandler()}>{item.name}</a>
                                                                         </Link>
                                                                     </li>
                                                                 )

@@ -6,6 +6,7 @@ import {Context} from "../../context/context";
 const Accordion = ({filterContent}) => {
     const router = useRouter()
     const {slug: _, ...routerQueries} = router.query
+    const [filterContext, setFilterContext] = useContext(Context)
     const filterSearchHandler = () => {
         router.push({
             pathname:router.query.slug,
@@ -20,7 +21,6 @@ const Accordion = ({filterContent}) => {
             }
         })
     }
-    const [filterContext, setFilterContext] = useContext(Context)
     const renderedFilterContent = filterContent.map((item,index) => {
         return (
             <div key={item.id}>

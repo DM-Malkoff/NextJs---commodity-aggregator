@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {quantityProducts} from "../constants/config";
+import {Context} from "../context/context";
 
 const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
     const router = useRouter()
@@ -14,6 +15,7 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
         {sortName: 'price', sortType: 'asc', sortText: 'Сначала дешевые'},
         {sortName: '', sortType: 'clear', sortText: 'Не сортировать'}
     ]
+    const [filterContext, setFilterContext] = useContext(Context)
     useEffect(() => {
         const sortBlock = document.getElementById('sort_block')
         document.addEventListener("click", (e) => {
@@ -59,6 +61,9 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
             setSortTitle(sortTypes.find((item => item.sortType == sortType)).sortText)
         }
     }
+    const filterButtonClick = () => {
+        setFilterContext(true)
+    }
 
     return (
         <div className="shop_sorting_panel" id="sort_block">
@@ -84,10 +89,11 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
                 </div>
             </div>
             <div className="filter_popup_btn_wr">
-                <div className="filter_popup_btn"><span>Фильтр</span></div>
+                <div className="filter_popup_btn" onClick={()=>filterButtonClick()}>
+                    <span>Фильтр</span>
+                </div>
             </div>
-
-            <div className="total_qnt_products">{Object.keys(router.query).length > 1 && quantityFilterProduct && router.query.page !== undefined >= quantityProducts ? '': `Найдено ${quantityFilterProduct >= quantityProducts ? totalQuantityProducts:quantityFilterProduct} товаров`}</div>
+            {/*<div className="total_qnt_products">{Object.keys(router.query).length > 1 && quantityFilterProduct && router.query.page !== undefined >= quantityProducts ? '': `Найдено ${quantityFilterProduct >= quantityProducts ? totalQuantityProducts:quantityFilterProduct} товаров`}</div>*/}
         </div>
     );
 };

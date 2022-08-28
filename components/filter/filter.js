@@ -1,6 +1,22 @@
 import Accordion from "./accordion";
+import {useContext, useEffect, useState} from "react";
+import {Context} from "../../context/context";
 
-export default function Filter(){
+export default function Filter() {
+    const [showFilter, setShowFilter] = useState(false)
+    const [filterContext, setFilterContext] = useContext(Context)
+
+    useEffect(() => {
+        if (filterContext === true){
+            setShowFilter(true)
+        }
+    }, [filterContext])
+
+    const closeFilterButton = () => {
+        setFilterContext(false)
+        setShowFilter(false)
+    }
+
     const filterContent = [
         {
             id: 1,
@@ -41,10 +57,18 @@ export default function Filter(){
         // }
     ]
 
-    return(
-        <div className="mode_folder_filter">
+    return (
+        <div className={`mode_folder_filter ${showFilter ? 'active' : ''}`}
+             onClick={() => {
+                 setFilterContext(false)
+                 setShowFilter(false)
+            }}
+        >
             <div className="filter_block_wrapper">
-                <div className="filter_block_wrap">
+                <div className="filter_block_wrap" onClick={(e) => {
+                    e.stopPropagation()
+                }}>
+                    <div className="filter_block_close" onClick={()=> closeFilterButton()}>&nbsp;</div>
                     <div className="filter_block_title">Фильтр</div>
                     <form action="#" className="shop2-filter">
                         <div className="table-filter-param">

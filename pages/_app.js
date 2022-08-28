@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 NProgress.configure({ showSpinner: false });
 
 function MyApp({ Component, pageProps }) {
-  const [context, setContext] = useState('Test context')
+  const [context, setContext] = useState('Empty context')
   Router.events.on('routeChangeStart',(url)=>{
       NProgress.start();
   })
