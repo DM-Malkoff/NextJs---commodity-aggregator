@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {quantityProducts} from "../constants/config";
-import {Context} from "../context/context";
+import {ShowFilterContext} from "../context/context";
 
 const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
     const router = useRouter()
@@ -15,7 +15,8 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
         {sortName: 'price', sortType: 'asc', sortText: 'Сначала дешевые'},
         {sortName: '', sortType: 'clear', sortText: 'Не сортировать'}
     ]
-    const [filterContext, setFilterContext] = useContext(Context)
+    const [showFilterContext, setShowFilterContext] = useContext(ShowFilterContext)
+
     useEffect(() => {
         const sortBlock = document.getElementById('sort_block')
         document.addEventListener("click", (e) => {
@@ -62,7 +63,7 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
         }
     }
     const filterButtonClick = () => {
-        setFilterContext(true)
+        setShowFilterContext(true)
     }
 
     return (

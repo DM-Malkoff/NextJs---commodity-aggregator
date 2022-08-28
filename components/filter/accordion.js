@@ -1,19 +1,23 @@
 import AccordionItems from "./accordionItems";
 import {useContext, useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {Context} from "../../context/context";
+import {FilterDataContext, ShowFilterContext} from "../../context/context";
 
 const Accordion = ({filterContent}) => {
     const router = useRouter()
     const {slug: _, ...routerQueries} = router.query
-    const [filterContext, setFilterContext] = useContext(Context)
+    const [filterContext, setFilterContext] = useContext(FilterDataContext)
+    const [showFilterContext, setShowFilterContext] = useContext(ShowFilterContext)
+
     const filterSearchHandler = () => {
+        setShowFilterContext(false)
         router.push({
             pathname:router.query.slug,
             query: {...routerQueries, ...filterContext}
         })
     }
     const filterClearFilter = () => {
+        setShowFilterContext(false)
         router.push({
             pathname: router.query.slug,
             query: {

@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {Context} from "../../context/context";
+import {FilterDataContext} from "../../context/context";
 import {useRouter} from "next/router";
 
 const AccordionItems = ({item, index, onPress}) => {
@@ -7,12 +7,11 @@ const AccordionItems = ({item, index, onPress}) => {
     const minPriceValue = router.query.min_price ? router.query.min_price: 'от'
     const maxPriceValue = router.query.max_price ? router.query.max_price: 'до'
 
-    const [filterContext, setFilterContext] = useContext(Context)
+    const [filterContext, setFilterContext] = useContext(FilterDataContext)
 
     const [filterOptions, setFilterOptions] = useState({})
 
     const [isShow, setIsShow] = useState(index == 0 ? true : false)
-    // const [searchClick,setSearchClick] = useState(false)
 
     function itemClick() {
         setIsShow(!isShow)

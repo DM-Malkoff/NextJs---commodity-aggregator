@@ -1,19 +1,21 @@
 import Accordion from "./accordion";
 import {useContext, useEffect, useState} from "react";
-import {Context} from "../../context/context";
+import {ShowFilterContext} from "../../context/context";
 
 export default function Filter() {
     const [showFilter, setShowFilter] = useState(false)
-    const [filterContext, setFilterContext] = useContext(Context)
+    const [showFilterContext, setShowFilterContext] = useContext(ShowFilterContext)
 
     useEffect(() => {
-        if (filterContext === true){
+        if (showFilterContext === true){
             setShowFilter(true)
+        }else{
+            setShowFilter(false)
         }
-    }, [filterContext])
+    }, [showFilterContext])
 
     const closeFilterButton = () => {
-        setFilterContext(false)
+        showFilterContext(false)
         setShowFilter(false)
     }
 
@@ -60,7 +62,7 @@ export default function Filter() {
     return (
         <div className={`mode_folder_filter ${showFilter ? 'active' : ''}`}
              onClick={() => {
-                 setFilterContext(false)
+                 setShowFilterContext(false)
                  setShowFilter(false)
             }}
         >

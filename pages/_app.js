@@ -1,13 +1,14 @@
 import '../styles/globals.scss'
 
 import React, {useState} from "react";
-import {Context} from "../context/context";
+import {FilterDataContext, ShowFilterContext} from "../context/context";
 import Router from "next/router";
 import NProgress from "nprogress";
 NProgress.configure({ showSpinner: false });
 
 function MyApp({ Component, pageProps }) {
-  const [context, setContext] = useState('Empty context')
+  const [filterDataContext, setFilterDataContext] = useState('Empty Filter Data context')
+  const [showFilterContext,setShowFilterContext] =   useState('Empty Show Filter context')
   Router.events.on('routeChangeStart',(url)=>{
       NProgress.start();
   })
@@ -17,9 +18,11 @@ function MyApp({ Component, pageProps }) {
   return (
       <>
           <div className='site__wrapper'>
-              <Context.Provider value={[context, setContext]}>
-                <Component {...pageProps} />
-              </Context.Provider>
+            <FilterDataContext.Provider value={[filterDataContext, setFilterDataContext]}>
+                <ShowFilterContext.Provider value={[showFilterContext,setShowFilterContext]}>
+                    <Component {...pageProps} />
+                </ShowFilterContext.Provider>
+            </FilterDataContext.Provider>
           </div>
       </>
   )
