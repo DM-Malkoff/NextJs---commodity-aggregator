@@ -12,3 +12,51 @@ export const filterOptions = [
     {slug: 'shiny', optionsIds: [16, 28]},
     {slug: 'diski', optionsIds: [5, 9, 3]}
 ]
+
+export const menuCategories = [
+    {
+        "id": 5033,
+        "name": "Грузовые шины",
+        "slug": "gruzovye-shiny",
+        "parent": 0,
+        "description": "",
+        "image": null,
+        "count": 174,
+    },
+    {
+        "id": 27,
+        "name": "Диски",
+        "slug": "diski",
+        "parent": 0,
+        "description": "",
+        "image": null,
+        "count": 9537,
+    },
+    {
+        "id": 5223,
+        "name": "Зимние мотошины",
+        "slug": "zimnie-motoshiny",
+        "parent": 4741,
+        "description": "",
+        "image": null,
+        "count": 2,
+    },
+    {
+        "id": 4741,
+        "name": "Мотошины",
+        "slug": "motoshiny",
+        "parent": 0,
+        "description": "",
+        "image": null,
+        "count": 627,
+    },
+    {
+        "id": 956,
+        "name": "Шины",
+        "slug": "shiny",
+        "parent": 0,
+        "description": "",
+        "image": null,
+        "count": 4833,
+    }
+]

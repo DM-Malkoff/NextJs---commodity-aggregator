@@ -15,7 +15,7 @@ import {quantityProducts, siteName, siteUrl} from "../../constants/config";
 import {getAttributes} from "../../utils/attributes";
 
 const Slug = ({products, categories, attributes, currentCategoryId}) => {
-    // console.log("attributes >> ", attributes)
+    // console.log("categories >> ", categories)
     const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     const currentPage = router.query.page
