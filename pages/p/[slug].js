@@ -179,16 +179,27 @@ export default function ProductPage({product, upsellProducts}) {
     )
 }
 
-export async function getServerSideProps(context) {
-    const {data: product} = await getProductData(context.query.id)
+export async function getServerSideProps(ctx) {
+    console.log("1111",ctx)
+    const {data: product} = await getProductData(ctx.query.id)
+    console.log("222",product)
     const crossSellProductsIds = []
     const crossSellIds = []
 
-    product.cross_sell_ids.map((item, index) => {
-        if (index < 4) {
-            crossSellProductsIds.push(item)
-        }
-    })
+    if (Array.isArray(product.cross_sell_ids)){
+        product.cross_sell_ids.map((item, index) => {
+            if (index < 4) {
+                crossSellProductsIds.push(item)
+            }
+        })
+    }else{
+        product.upsell_ids.map((item, index) => {
+            if (index < 4) {
+                crossSellProductsIds.push(item)
+            }
+        })
+    }
+
 
     await Promise.all(crossSellProductsIds.map(async (item) => {
         let {data: crossSellProduct} = await getProductData(item)
