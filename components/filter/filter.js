@@ -15,7 +15,7 @@ export default function Filter() {
     }, [showFilterContext])
 
     const closeFilterButton = () => {
-        showFilterContext(false)
+        setShowFilterContext(false)
         setShowFilter(false)
     }
 
