@@ -1,7 +1,7 @@
 import api from "../api";
 import {quantityProducts} from "../constants/config";
 
-export const getProductsData = async (queries,categoryId, numPage, qntProducts,orderby, order) => {
+export const getProductsData = async (queries) => {
     const {slug: _, ...apiQueries} = queries
 
     let apiString = `products?per_page=${quantityProducts}&`
