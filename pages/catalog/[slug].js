@@ -18,10 +18,10 @@ const Slug = ({products, categories, attributes, currentCategoryId}) => {
     // console.log("categories >> ", categories)
     const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
+    const availableSlug = currentCategory.slug
     const currentPage = router.query.page
     const currentSlug = router.query.slug
 
-    const availableSlug = categories.find(item => item.id == currentCategoryId).slug
     let currentPageNum = currentPage == undefined ? 0 : currentPage
 
     let townCaption = currentCategory.name
@@ -94,7 +94,6 @@ export default Slug;
 
 export async function getServerSideProps(ctx) {
     const {data: categories} = await getCategories();
-    const {data: attributes} = await getAttributes();
     const {data: products} = await getProductsData(
         ctx.query,
         ctx.query.id,
@@ -103,13 +102,14 @@ export async function getServerSideProps(ctx) {
         ctx.query.orderby,
         ctx.query.order
     );
+    //const {data: attributes} = await getAttributes();
 
     return {
         props: {
             categories: categories ?? {},
-            attributes: attributes ?? {},
             products: products ?? {},
-            currentCategoryId: ctx.query.id
+            currentCategoryId: ctx.query.id,
+            //attributes: attributes ?? {},
         }
     }
 }
