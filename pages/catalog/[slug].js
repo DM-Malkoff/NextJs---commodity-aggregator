@@ -12,9 +12,8 @@ import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
 import {quantityProducts, siteName, siteUrl} from "../../constants/config";
-import {getAttributes} from "../../utils/attributes";
 
-const Slug = ({products, categories, attributes, currentCategoryId}) => {
+const Slug = ({products, categories, currentCategoryId}) => {
     // console.log("categories >> ", categories)
     const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
