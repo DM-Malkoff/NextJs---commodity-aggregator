@@ -93,8 +93,8 @@ const Slug = ({products, categories, attributes, currentCategoryId}) => {
 export default Slug;
 
 export async function getServerSideProps(ctx) {
-    const {data: categories} = await getCategories();
-    const {data: attributes} = await getAttributes();
+    // const {data: categories} = await getCategories();
+    // const {data: attributes} = await getAttributes();
     const {data: products} = await getProductsData(
         ctx.query,
         ctx.query.id,
@@ -106,8 +106,8 @@ export async function getServerSideProps(ctx) {
 
     return {
         props: {
-            categories: categories ?? {},
-            attributes: attributes ?? {},
+            // categories: categories ?? {},
+            // attributes: attributes ?? {},
             products: products ?? {},
             currentCategoryId: ctx.query.id
         }

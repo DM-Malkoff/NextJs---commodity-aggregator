@@ -180,9 +180,7 @@ export default function ProductPage({product, upsellProducts}) {
 }
 
 export async function getServerSideProps(ctx) {
-    console.log("1111",ctx)
     const {data: product} = await getProductData(ctx.query.id)
-    console.log("222",product)
     const crossSellProductsIds = []
     const crossSellIds = []
 

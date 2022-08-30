@@ -27,10 +27,6 @@ function Home({productsTires, productsDiscs, categories}) {
             </Head>
             <Header/>
             <div className='site__container'>
-                <SearchBlock/>
-                <MainSlider data={productsTires} caption={'Популярные шины'} />
-                <MainSlider data={productsDiscs} caption={'Популярные диски'} />
-
                 <div className="text__block__wrapper">
                     <div className="text__block__wrap">
                         <div className="block__title"><h1>Автомобильные шины, диски и аксессуары</h1></div>
@@ -40,6 +36,10 @@ function Home({productsTires, productsDiscs, categories}) {
                         </div>
                     </div>
                 </div>
+                <MainSlider data={productsTires} caption={'Популярные шины'} />
+                <MainSlider data={productsDiscs} caption={'Популярные диски'} />
+
+
 
             </div>
             <Footer/>
