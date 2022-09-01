@@ -23,8 +23,149 @@ export default function Filter() {
         {
             id: 1,
             title: 'Цена: (руб.)',
-            type: 'price',
+            categories: 'all',
+            attribute: 'price',
         },
+        {
+            id: 5,
+            title: 'Диаметр (D)',
+            categories: [27],
+            attribute: 'pa_diametr-d',
+            attribute_term: [
+                {
+                    id: 47,
+                    "name": "R12",
+                    "slug": "12",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 3,
+
+                },
+                {
+                    id: 372,
+                    "name": "R13",
+                    "slug": "13",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 50,
+                },
+                {
+                    id: 179,
+                    "name": "R14",
+                    "slug": "14",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 309,
+                },
+                {
+                    id: 20,
+                    "name": "R15",
+                    "slug": "15",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 1296,
+                },
+                {
+                    id: 38,
+                    "name": "R16",
+                    "slug": "16",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 2273,
+
+                },
+                {
+                    id: 60,
+                    "name": "R17",
+                    "slug": "17",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 2639,
+
+                },
+                {
+                    id: 31,
+                    "name": "R18",
+                    "slug": "18",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 1429,
+
+                },
+                {
+                    id: 109,
+                    "name": "R19",
+                    "slug": "19",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 678,
+                },
+                {
+                    id: 187,
+                    "name": "R20",
+                    "slug": "20",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 559,
+                },
+                {
+                    id: 525,
+                    "name": "R21",
+                    "slug": "21",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 199,
+                },
+                {
+                    id: 647,
+                    "name": "R22",
+                    "slug": "22",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 100,
+                },
+                {
+                    id: 3775,
+                    "name": "R23",
+                    "slug": "23",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 2,
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: 'Тип диска',
+            categories: [27],
+            attribute: 'pa_tip-diska',
+            attribute_term: [
+                {
+                    id: 2118,
+                    "name": "Кованый",
+                    "slug": "kovanyj",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 19,
+                },
+                {
+                    id: 18,
+                    "name": "Литой",
+                    "slug": "litoj",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 9168,
+                },
+                {
+                    id: 45,
+                    "name": "Штампованный",
+                    "slug": "shtampovannyj",
+                    "description": "",
+                    "menu_order": 0,
+                    "count": 349,
+                }
+            ]
+        }
         // {
         //     id: 2,
         //     title: 'Производитель:',

@@ -12,9 +12,10 @@ import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
 import {quantityProducts, siteName, siteUrl} from "../../constants/config";
+import {getAttributes} from "../../utils/attributes";
 
-const Slug = ({products, categories, currentCategoryId}) => {
-    // console.log("categories >> ", categories)
+const Slug = ({products, categories, currentCategoryId, attributes}) => {
+    console.log("FIlterProducts >> ", attributes)
     const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     const availableSlug = currentCategory.slug
@@ -93,22 +94,15 @@ export default Slug;
 
 export async function getServerSideProps(ctx) {
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(
-        ctx.query,
-        ctx.query.id,
-        ctx.query.page,
-        quantityProducts,
-        ctx.query.orderby,
-        ctx.query.order
-    );
-    //const {data: attributes} = await getAttributes();
+    const {data: products} = await getProductsData(ctx.query);
+    const {data: attributes} = await getAttributes();
 
     return {
         props: {
             categories: categories ?? {},
             products: products ?? {},
             currentCategoryId: ctx.query.id,
-            //attributes: attributes ?? {},
+            attributes: attributes ?? {},
         }
     }
 }

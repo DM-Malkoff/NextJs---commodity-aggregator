@@ -9,8 +9,10 @@ export const partnerLink = [
 ]
 
 export const filterOptions = [
-    {slug: 'shiny', optionsIds: [16, 28]},
-    {slug: 'diski', optionsIds: [5, 9, 3]}
+    {
+        slug: 'diski',
+        options: [1, 3, ]
+    }
 ]
 
 export const menuCategories = [

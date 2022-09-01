@@ -18,6 +18,7 @@ const Accordion = ({filterContent}) => {
     }
     const filterClearFilter = () => {
         setShowFilterContext(false)
+        setIsReset(true)
         router.push({
             pathname: router.query.slug,
             query: {
@@ -35,18 +36,18 @@ const Accordion = ({filterContent}) => {
                         filterSearchHandler()
                     }}
                 />
-                <div className="filter_buttons_wrap">
-                    <div className="filter_buttons">
-                        <span className="shop_btn shop2-filter-go" onClick={filterSearchHandler}>Показать</span>
-                        <span className="shop_btn reset" onClick={filterClearFilter}>Очистить</span>
-                    </div>
-                </div>
             </div>
         )
     })
     return (
         <>
             {renderedFilterContent}
+            <div className="filter_buttons_wrap">
+                <div className="filter_buttons">
+                    <span className="shop_btn shop2-filter-go" onClick={filterSearchHandler}>Показать</span>
+                    <span className="shop_btn reset" onClick={filterClearFilter}>Очистить</span>
+                </div>
+            </div>
         </>
     );
 };
