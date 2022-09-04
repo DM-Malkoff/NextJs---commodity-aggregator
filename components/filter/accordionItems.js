@@ -41,6 +41,7 @@ const AccordionItems = ({item, index, onPress}) => {
     const filterOptionsHandler = () =>{
         setFilterOptions(...filterOptions,)
     }
+    const isDiametrD = item.attribute === 'pa_diametr-d' ? true : false
 
     return (
         <>
@@ -84,15 +85,14 @@ const AccordionItems = ({item, index, onPress}) => {
                                 </div>
                             </>
                             :
-                            item.content
-                        }
-                        {item.attribute === 'pa_diametr-d' ?
                             <>
+
                                 {item.attribute_term.map((attributeItem,index) => {
                                     const activeVal  = index === filterAttributeIndex ? "active-val":''
                                     return (
                                         <FilterOptions
                                             key ={attributeItem.id}
+                                            isDiametrD={isDiametrD}
                                             attributeName = {item.attribute}
                                             attributeItem={attributeItem}
                                             activeVal = {activeVal}
@@ -103,28 +103,6 @@ const AccordionItems = ({item, index, onPress}) => {
                                     )
                                 })}
                             </>
-                            :
-                            false
-                        }
-                        {item.attribute == 'pa_tip-diska' ?
-                            <>
-                                {item.attribute_term.map((attributeItem,index) => {
-                                    const activeVal  = index === filterAttributeIndex ? "active-val":''
-                                    return (
-                                        <FilterOptions
-                                            key ={attributeItem.id}
-                                            attributeName = {item.attribute}
-                                            attributeItem={attributeItem}
-                                            activeVal = {activeVal}
-                                            onCLick = {() => {
-                                                setFilterAttributeIndex(index)
-                                            }}
-                                        />
-                                    )
-                                })}
-                            </>
-                            :
-                            false
                         }
                     </div>
                 </div>

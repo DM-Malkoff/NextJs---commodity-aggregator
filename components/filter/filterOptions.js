@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {FilterDataContext} from "../../context/context";
 
-const FilterOptions = ({attributeName, attributeItem, activeVal, onCLick}) => {
+const FilterOptions = ({attributeName, attributeItem, activeVal, onCLick, isDiametrD}) => {
     const [filterContext, setFilterContext] = useContext(FilterDataContext)
     const [filterOptions, setFilterOptions] = useState({})
 
@@ -15,10 +15,12 @@ const FilterOptions = ({attributeName, attributeItem, activeVal, onCLick}) => {
         // setActiveOption(!activeOption)
         onCLick()
     }
+    const optionNameDiametrD =  `R${attributeItem.name.slice(0,-2)}`
+    const optionName = isDiametrD ? optionNameDiametrD:attributeItem.name
 
     return (
         <>
-            <span className={`param_val ${activeVal}`} onClick={()=>filterOptionHandler()}>{attributeItem.name}</span>
+            <div className={`param_val ${activeVal}`} onClick={()=>filterOptionHandler()}>{optionName}</div>
         </>
     );
 };

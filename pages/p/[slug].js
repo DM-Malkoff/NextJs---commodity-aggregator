@@ -207,7 +207,7 @@ export async function getServerSideProps(ctx) {
     return {
         props: {
             product: product ?? {},
-            upsellProducts: crossSellIds ?? {}
+            upsellProducts: crossSellIds ?? []
         }
     }
 }

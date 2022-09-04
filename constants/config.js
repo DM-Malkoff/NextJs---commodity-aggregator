@@ -10,8 +10,14 @@ export const partnerLink = [
 
 export const filterOptions = [
     {
+        categoryId: '27',
         slug: 'diski',
-        options: [1, 3, ]
+        terms: [1,2,3,4,5,6],
+    },
+    {
+        categoryId: '956',
+        slug: 'shiny',
+        terms: [1,2,3,4,5,6],
     }
 ]
 
