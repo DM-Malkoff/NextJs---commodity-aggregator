@@ -26,7 +26,7 @@ function Home({productsTires, productsDiscs, categories}) {
                 <meta property="og:site_name" content={siteName}/>
                 <meta property="og:type" content="website"/>
             </Head>
-            <Header/>
+            <Header categories={categories}/>
             <div className='site__container'>
                 <div className="text__block__wrapper">
                     <div className="text__block__wrap">

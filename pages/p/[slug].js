@@ -11,8 +11,9 @@ import Tabs from "../../components/tabs";
 import RelatedProductsSlider from "../../components/relatedProductsSlider";
 import ProductImages from "../../components/productImages";
 import {siteName, siteUrl} from "../../constants/config";
+import {getCategories} from "../../utils/categories";
 
-export default function ProductPage({product, upsellProducts}) {
+export default function ProductPage({product,categories, upsellProducts}) {
     const pathLocation = useRouter().pathname
     const customFields = product.meta_data
     const vendor = customFields.find(item => item.key === "Производитель")
@@ -46,7 +47,7 @@ export default function ProductPage({product, upsellProducts}) {
                 <meta property="og:site_name" content={siteName}/>
                 <meta property="og:type" content="website"/>
             </Head>
-            <Header/>
+            <Header categories={categories}/>
             <div className='site__container product'>
                 <div className='site__main__wrap product'>
                     <main role="main" className="site__main product">
@@ -181,6 +182,7 @@ export default function ProductPage({product, upsellProducts}) {
 
 export async function getServerSideProps(ctx) {
     const {data: product} = await getProductData(ctx.query.id)
+    const {data: categories} = await getCategories();
     const crossSellProductsIds = []
     const crossSellIds = []
 
@@ -207,6 +209,7 @@ export async function getServerSideProps(ctx) {
     return {
         props: {
             product: product ?? {},
+            categories: categories ?? {},
             upsellProducts: crossSellIds ?? []
         }
     }

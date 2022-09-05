@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import FilterOptions from "./filterOptions";
 
 const AccordionItems = ({item, index, onPress}) => {
+    console.log(">>>>>>",item)
     const router = useRouter()
     const minPriceValue = router.query.min_price ? router.query.min_price: 'от'
     const maxPriceValue = router.query.max_price ? router.query.max_price: 'до'
@@ -86,22 +87,25 @@ const AccordionItems = ({item, index, onPress}) => {
                             </>
                             :
                             <>
-
-                                {item.attribute_term.map((attributeItem,index) => {
-                                    const activeVal  = index === filterAttributeIndex ? "active-val":''
-                                    return (
-                                        <FilterOptions
-                                            key ={attributeItem.id}
-                                            isDiametrD={isDiametrD}
-                                            attributeName = {item.attribute}
-                                            attributeItem={attributeItem}
-                                            activeVal = {activeVal}
-                                            onCLick = {() => {
-                                                setFilterAttributeIndex(index)
-                                            }}
-                                        />
-                                    )
-                                })}
+                                {item.attribute_terms ?
+                                    item.attribute_terms.map((attributeItem,index) => {
+                                        const activeVal  = index === filterAttributeIndex ? "active-val":''
+                                        return (
+                                            <FilterOptions
+                                                key ={attributeItem.id}
+                                                isDiametrD={isDiametrD}
+                                                attributeName = {item.attribute}
+                                                attributeItem={attributeItem}
+                                                activeVal = {activeVal}
+                                                onCLick = {() => {
+                                                    setFilterAttributeIndex(index)
+                                                }}
+                                            />
+                                        )
+                                    })
+                                :
+                                    false
+                                }
                             </>
                         }
                     </div>

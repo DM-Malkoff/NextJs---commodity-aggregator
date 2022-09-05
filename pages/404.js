@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import MainLayout from "../components/layouts/MainLayout";
 
-const NotFoundPage = () => {
+const NotFoundPage = ({categories}) => {
     return (
         <div className='not-found'>
             <MainLayout caption={"Упс... Страница не найдена"} lastNode={"404"}>

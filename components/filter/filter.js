@@ -31,44 +31,85 @@ export default function Filter({terms}) {
             title: 'Тип диска',
             categories: [27],
             attribute: 'pa_tip-diska',
-            attribute_term: terms.find((item) => item.id === 3).attribute_terms
+        },
+        {
+            id: 5,
+            title: 'Диаметр (D), в дюймах',
+            categories: [27],
+            attribute: 'pa_diametr-d',
+        },
+        {
+            id: 16,
+            title: 'Диаметр, в дюймах',
+            categories: [5033,4741],
+            attribute: 'pa_diametr',
+        },
+        {
+            id: 18,
+            title: 'Индекс нагрузки',
+            categories: [5033],
+            attribute: 'pa_indeks-nagruzki',
+        },
+        {
+            id: 14,
+            title: 'Ширина, в дюймах',
+            categories: [5033, 4741],
+            attribute: 'pa_shirina-diska',
         },
         {
             id: 4,
             title: 'Ширина обода, в дюймах',
-            categories: [27],
+            categories: [27,5033],
             attribute: 'pa_shirina-diska',
-            attribute_term: terms.find((item) => item.id === 4).attribute_terms
         },
         {
-            id: 5,
-            title: 'Диаметр (D)',
-            categories: [27],
-            attribute: 'pa_diametr-d',
-            attribute_term: terms.find((item) => item.id === 5).attribute_terms
+            id: 15,
+            title: 'Профиль',
+            categories: [5033,4741],
+            attribute: 'pa_profil',
+        },
+        {
+            id: 7,
+            title: 'PCD (Сверловка), мм.',
+            categories: [27,5225,5226,5227],
+            attribute: 'pa_pcd',
+        },
+        {
+            id: 8,
+            title: 'Тип крепежа',
+            categories: [27,5225,5226,5227],
+            attribute: 'pa_tip-krepezha',
         },
         {
             id: 6,
             title: 'Вылет (ET)',
             categories: [27],
             attribute: 'pa_vylet-et',
-            attribute_term: terms.find((item) => item.id === 6).attribute_terms
         },
         {
             id: 1,
             title: 'Производитель',
-            categories: [27,956],
+            categories: [27,956,4741],
             attribute: 'pa_proizvoditel',
-            attribute_term: terms.find((item) => item.id === 1).attribute_terms
         },
         {
             id: 2,
             title: 'Модель',
             categories: [27,956],
             attribute: 'pa_model',
-            attribute_term: terms.find((item) => item.id === 2).attribute_terms
-        }
-
+        },
+        {
+            id: 30,
+            title: 'Flow Forming',
+            categories: [27],
+            attribute: 'pa_flow-forming',
+        },
+        {
+            id: 34,
+            title: 'Область применения',
+            categories: [4741],
+            attribute: 'pa_oblast-primeneniya',
+        },
 
     ]
 
@@ -87,7 +128,10 @@ export default function Filter({terms}) {
                     <div className="filter_block_title">Фильтр</div>
                     <form action="#" className="shop2-filter">
                         <div className="table-filter-param">
-                            <Accordion filterContent={filterContent}/>
+                            <Accordion
+                                terms={terms}
+                                filterContent={filterContent}
+                            />
                         </div>
                     </form>
                 </div>

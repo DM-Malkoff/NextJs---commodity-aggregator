@@ -1,26 +1,22 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
-import {quantityProducts} from "../constants/config";
+import {sortSettings} from "../constants/config";
 import {ShowFilterContext} from "../context/context";
 
-const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
+const Sort = () => {
     const router = useRouter()
     const {slug: _, ...routerQueries} = router.query
     const {order:__,orderby:___, ...routerQueriesWithoutSort} = routerQueries
     const [sortClick, setSortCLick] = useState(false)
     const [sortTitle, setSortTitle] = useState('Сортировать по')
     const [selectedSortType, setSelectedSortType] = useState('')
-    const sortTypes = [
-        {sortName: 'price', sortType: 'desc', sortText: 'Сначала дорогие'},
-        {sortName: 'price', sortType: 'asc', sortText: 'Сначала дешевые'},
-        {sortName: '', sortType: 'clear', sortText: 'Не сортировать'}
-    ]
+    const sortTypes = sortSettings
     const [showFilterContext, setShowFilterContext] = useContext(ShowFilterContext)
+    const ref = useRef(null)
 
     useEffect(() => {
-        const sortBlock = document.getElementById('sort_block')
         document.addEventListener("click", (e) => {
-            const withinBoundaries = e.composedPath().includes(sortBlock)
+            const withinBoundaries = e.composedPath().includes(ref.current)
             if (!withinBoundaries) {
                 setSortCLick(false)
             }
@@ -67,9 +63,9 @@ const Sort = ({totalQuantityProducts, quantityFilterProduct}) => {
     }
 
     return (
-        <div className="shop_sorting_panel" id="sort_block">
+        <div className="shop_sorting_panel">
             <div className="sort_bl_wr">
-                <div className={`sort_bl_in ${sortClick ? 'opened' : ''}`}>
+                <div className={`sort_bl_in ${sortClick ? 'opened' : ''}`} ref={ref}>
                     <div className="sort_bl_title" onClick={sortHandler}>
                         <span>{sortTitle}</span>
                     </div>

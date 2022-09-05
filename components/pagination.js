@@ -51,10 +51,10 @@ const Pagination = ({totalQuantityProducts, productsLength}) => {
                 {
                     currentPage > 3 ? <li className="page-num"><span>...</span></li> : false
                 }
-                {pageNumbers.map((number) => {
+                {pageNumbers.map((number,index) => {
                     if (currentPage == undefined && number < 5 && number > 1) {
                         return (
-                            <li key={number} className="page-num">
+                            <li key={index} className="page-num">
                                 <Link href={{
                                     pathname: `/catalog/${currentSlug}`,
                                     query: {
@@ -70,7 +70,7 @@ const Pagination = ({totalQuantityProducts, productsLength}) => {
                     if (number > 1 && (number == currentPage || number == currentPage - 1 || number == currentPage + 1)) {
                         if (number == currentPage) {
                             return (
-                                <li className="page-num active-num"><span>{number}</span></li>
+                                <li key={index} className="page-num active-num"><span>{number}</span></li>
                             )
                         } else {
                             return (

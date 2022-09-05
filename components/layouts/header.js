@@ -5,13 +5,18 @@ import {siteName} from "../../constants/config";
 import MainMenu from "../mainMenu";
 import SearchPopup from "../searchPopup";
 
-const Header = () => {
+const Header = ({categories}) => {
+    let categoriesData = []
+    if (!!categories){
+         categoriesData = categories.filter((item)=> item.slug !== 'misc')
+    }
     const [showMainMenu, setShowMainMenu] = useState(false)
     const [showSearchBLock, setShowSearchBlock] = useState(false)
 
     return (
         <>
             <MainMenu
+                categories={categoriesData}
                 showMenu={showMainMenu}
                 handler={() => {
                     setShowMainMenu(false)

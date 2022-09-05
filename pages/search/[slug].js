@@ -4,8 +4,9 @@ import {getSearchProducts} from "../../utils/searchProducts";
 import ProductList from "../../components/productList";
 import Head from "next/head";
 import Link from "next/link";
+import {getCategories} from "../../utils/categories";
 
-const SearchProducts = ({searchResults}) => {
+const SearchProducts = ({searchResults,categories}) => {
     const searchQuery = useRouter().query.id
 
     return (
@@ -16,7 +17,9 @@ const SearchProducts = ({searchResults}) => {
                       content="Здесь Вы можете найте интересующий товар в нашем каталоге по названию"/>
                 <meta name="robots" content="noindex, follow"/>
             </Head>
-            <MainLayout caption={'Поиск товаров'}>
+            <MainLayout
+                categories={categories}
+                caption={'Поиск товаров'}>
                 <div className="search__products__list">
                     <div className="search__message">По
                         запросу <span>{searchQuery}</span> найдено {searchResults.length} товаров.
@@ -37,10 +40,11 @@ const SearchProducts = ({searchResults}) => {
 export default SearchProducts;
 
 export async function getServerSideProps(ctx) {
-    console.log(ctx)
+    const {data: categories} = await getCategories();
     const {data: searchResults} = await getSearchProducts(encodeURI(ctx.query.id))
     return {
         props: {
+            categories: categories ?? {},
             searchResults: searchResults
         }
     }

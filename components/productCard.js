@@ -72,13 +72,13 @@ const ProductCard = ({productData}) => {
                                 <div className="product-price">
                                     {productData.regular_price > 0 ?
                                         <div className="price-old question">
-                                            <span><strong>{productData.regular_price}</strong>руб.</span>
+                                            <span><strong>{productData.regular_price}</strong> ₽</span>
                                         </div>
                                         :
                                         false
                                     }
                                     <div className="price-current">
-                                        <strong>{productData.sale_price}</strong> руб.
+                                        <strong>{productData.sale_price}</strong> ₽
                                     </div>
                                 </div>
                                 <GoToPartner url={shopLink} shopName={shopName}/>

@@ -6,11 +6,11 @@ import {useRouter} from "next/router";
 import SearchBlock from "../searchBlock";
 import React from "react";
 
-const CatalogLayout = ({children, caption, lastNode}) => {
+const CatalogLayout = ({categories,children, caption, lastNode}) => {
     const pathLocation = useRouter().pathname
     return(
         <div className='content'>
-            <Header/>
+            <Header categories={categories}/>
             <div className='site__container'>
                 <div className='site__main__wrap folder'>
                     <main role="main" className="site__main folder">

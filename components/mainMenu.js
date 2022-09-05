@@ -1,15 +1,17 @@
 import Link from "next/link";
-import {menuCategories} from "../constants/config";
 import {useEffect, useRef, useState} from "react";
+import MainMenuSub from "./mainMenuSub";
 
 
-const MainMenu = ({showMenu, handler}) => {
+const MainMenu = ({showMenu, categories, handler}) => {
     const [showSubMenu, setShowSubMenu] = useState(false)
 
+    const [indexMenuItem, setIndexMenuItem] = useState(null)
+
     const clickSubMenu = (e) => {
-        e.preventDefault()
-        setShowSubMenu(true)
+
     }
+
     const subMenuClickHandler = () => {
         handler()
         setShowSubMenu(false)
@@ -18,7 +20,7 @@ const MainMenu = ({showMenu, handler}) => {
     const [menuBlockHeight, setMenuBlockHeight] = useState(0)
     const ref = useRef(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         setMenuBlockHeight(ref.current.scrollHeight)
     })
 
@@ -34,60 +36,31 @@ const MainMenu = ({showMenu, handler}) => {
                         <div className="folders__block__wrap waSlideMenu-nav" ref={ref}>
                             <div className="waSlideMenu-wrapper">
                                 <ul className="menu-default top__folders waSlideMenu-menu">
-                                    {menuCategories.map((item) => {
-                                        const subLevel = menuCategories.filter((subItem) => subItem.parent == item.id)
+                                    {categories.map((item,catIndex) => {
+                                        const subLevel = categories.filter((subItem) => subItem.parent == item.id)
                                         if (item.parent === 0) {
+                                            const activeSubMenu = catIndex === indexMenuItem ? true: false
                                             return (
-                                                <li key={item.id} className="subLevel">
-                                                    <Link href={{
-                                                        pathname: `/catalog/${item.slug}`,
-                                                        query: {
-                                                            id: item.id
-                                                        }
-                                                    }}>
-                                                        <a className="has_sublayer" onClick={subLevel.length ? clickSubMenu:handler}>
-                                                            {item.name}
-                                                            {subLevel.length ?
-                                                                <span>&nbsp;</span>
-                                                                :
-                                                                false
-                                                            }
-                                                        </a>
-                                                    </Link>
-                                                    {subLevel.length ?
-                                                        <ul className="waSlideMenu-menu waSlideMenu-i_menu">
-                                                            <li className="waSlideMenu-back">
-                                                                <span onClick={()=> {setShowSubMenu(false)}}>Назад</span>
-                                                            </li>
-                                                            <li className="parent-item">
-                                                                <Link href={{
-                                                                    pathname: `/catalog/${item.slug}`,
-                                                                    query: {
-                                                                        id: item.id
-                                                                    }
-                                                                }}>
-                                                                    <a onClick={() => subMenuClickHandler()}>{item.name}</a>
-                                                                </Link>
-                                                            </li>
-                                                            {subLevel.map((item) => {
-                                                                return (
-                                                                    <li key={item.id}>
-                                                                        <Link href={{
-                                                                            pathname: `/catalog/${item.slug}`,
-                                                                            query: {
-                                                                                id: item.id
-                                                                            }
-                                                                        }}>
-                                                                            <a onClick={() => subMenuClickHandler()}>{item.name}</a>
-                                                                        </Link>
-                                                                    </li>
-                                                                )
-                                                            })}
-                                                        </ul>
-                                                        :
-                                                        false
-                                                    }
-                                                </li>
+                                                <MainMenuSub
+                                                    key={item.id}
+                                                    activeSubMenu={activeSubMenu}
+                                                    cSMenu={()=> {
+                                                        setShowSubMenu(true)
+                                                    }}
+                                                    subLevel={subLevel}
+                                                    item={item}
+                                                    handler={handler}
+                                                    menuBlockHeight={menuBlockHeight}
+                                                    onClickBack={()=>{
+                                                        setShowSubMenu(false)
+                                                        setIndexMenuItem(null)
+                                                    }}
+                                                    onCLick={()=>{
+                                                        setIndexMenuItem(catIndex)
+
+                                                    }}
+                                                    subMenuClickHandler={subMenuClickHandler}
+                                                />
                                             )
                                         }
                                     })}
@@ -99,12 +72,13 @@ const MainMenu = ({showMenu, handler}) => {
             </div>
             <style jsx>{`
                 .waSlideMenu-wrapper{
-                    transform: ${showSubMenu ?'translateX(-100%);':'translateX(0);'};
+                    transform: ${showSubMenu ? 'translateX(-100%);' : 'translateX(0);'};
                     transition: 0.3s;
                 }
                 .folders__block__wrap{
-                    height: ${menuBlockHeight ? menuBlockHeight + 'px':false} 
+                    height: ${menuBlockHeight ? menuBlockHeight + 'px' : false} 
                 }
+            
             `}
             </style>
         </div>
