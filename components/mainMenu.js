@@ -1,16 +1,13 @@
 import Link from "next/link";
 import {useEffect, useRef, useState} from "react";
 import MainMenuSub from "./mainMenuSub";
+import {useRouter} from "next/router";
 
 
 const MainMenu = ({showMenu, categories, handler}) => {
+    const router = useRouter()
     const [showSubMenu, setShowSubMenu] = useState(false)
-
     const [indexMenuItem, setIndexMenuItem] = useState(null)
-
-    const clickSubMenu = (e) => {
-
-    }
 
     const subMenuClickHandler = () => {
         handler()
@@ -22,7 +19,10 @@ const MainMenu = ({showMenu, categories, handler}) => {
 
     useEffect(() => {
         setMenuBlockHeight(ref.current.scrollHeight)
-    })
+    },[])
+    useEffect(()=>{
+        setIndexMenuItem(null)
+    },[router])
 
     return (
         <div className={`burger__block__wrapper ${showMenu ? 'active' : ''}`} onClick={handler}>

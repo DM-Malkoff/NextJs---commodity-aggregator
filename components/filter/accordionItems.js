@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 import FilterOptions from "./filterOptions";
 
 const AccordionItems = ({item, index, onPress}) => {
-    console.log(">>>>>>",item)
     const router = useRouter()
     const minPriceValue = router.query.min_price ? router.query.min_price: 'от'
     const maxPriceValue = router.query.max_price ? router.query.max_price: 'до'

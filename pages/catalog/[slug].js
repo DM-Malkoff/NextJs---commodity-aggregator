@@ -11,12 +11,11 @@ import Footer from "../../components/layouts/footer";
 import Sort from "../../components/sort";
 import Pagination from "../../components/pagination";
 import Towns from "../../utils/towns";
-import {filterOptions, quantityProducts, siteName, siteUrl} from "../../constants/config";
-import {getAttributeTerms} from "../../utils/attributeTerms";
-import {getAttributes} from "../../utils/attributes";
+import {quantityProducts, siteName, siteUrl} from "../../constants/config";
+import {terms} from "../../constants/terms";
 
-const Slug = ({products, categories, currentCategoryId, terms}) => {
-    console.log("Terms >> ", terms)
+const Slug = ({products, categories, currentCategoryId}) => {
+
     const router = useRouter()
     const currentCategory = categories.find(item => item.id == currentCategoryId)
     const availableSlug = currentCategory.slug
@@ -29,6 +28,7 @@ const Slug = ({products, categories, currentCategoryId, terms}) => {
     if (Towns[currentPageNum]) {
         townCaption = `${currentCategory.name} в ${Towns[currentPageNum]}`
     }
+    const termsArray = terms
 
     return (
         <>
@@ -65,7 +65,7 @@ const Slug = ({products, categories, currentCategoryId, terms}) => {
                             <BreadCrumbs namePage={currentCategory.name}/>
                             <Caption caption={townCaption}/>
                             <div className="mode_folder_wrapper">
-                                <Filter terms={terms}/>
+                                <Filter terms={termsArray}/>
                                 <div className="mode_folder_body">
                                     <Sort totalQuantityProducts={currentCategory.count}
                                           quantityFilterProduct={products.length}/>
@@ -98,21 +98,21 @@ export default Slug;
 export async function getServerSideProps(ctx) {
     const {data: categories} = await getCategories();
     const {data: products} = await getProductsData(ctx.query);
-    const {data: attributes} = await getAttributes();
+    //const {data: attributes} = await getAttributes();
 
-    const myArr = []
-    const optionsObject = filterOptions.find((item) => item.categoryId === ctx.query.id)
-    if (optionsObject){
-        await Promise.all(optionsObject.attributeIds.map(async (item) => {
-            let {data: terms} = await getAttributeTerms(item)
-            myArr.push({id:item, attribute_terms:terms})
-        }))
-    }else{
-        await Promise.all(attributes.map(async (item) => {
-            let {data: terms} = await getAttributeTerms(item.id)
-            myArr.push({id:item.id, attribute_terms:terms})
-        }))
-    }
+    // const myArr = []
+    // const optionsObject = filterOptions.find((item) => item.categoryId === ctx.query.id)
+    // if (optionsObject){
+    //     await Promise.all(optionsObject.attributeIds.map(async (item) => {
+    //         let {data: terms} = await getAttributeTerms(item)
+    //         myArr.push({id:item, attribute_terms:terms})
+    //     }))
+    // }else{
+    //     await Promise.all(attributes.map(async (item) => {  // можно использовать для формирования своего массива объектов опций
+    //         let {data: terms} = await getAttributeTerms(item.id)
+    //         myArr.push({id:item.id, attribute_terms:terms})
+    //     }))
+    // }
 
     return {
         props: {
@@ -120,7 +120,7 @@ export async function getServerSideProps(ctx) {
             products: products ?? {},
             currentCategoryId: ctx.query.id ?? null,
             // attributes: attributes ?? {},
-            terms: myArr
+            // terms: myArr
         }
     }
 }

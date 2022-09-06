@@ -38,7 +38,7 @@ const MainMenuSub = ({cSMenu, onCLick, onClickBack, subLevel,item,handler,active
                                 id: item.id
                             }
                         }}>
-                            <a>{item.name}</a>
+                            <a onClick={() => subMenuClickHandler()}>{item.name}</a>
                         </Link>
                     </li>
                     {subLevel.map((item) => {
