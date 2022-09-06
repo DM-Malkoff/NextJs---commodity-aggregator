@@ -95,9 +95,14 @@ const Slug = ({products, categories, currentCategoryId}) => {
 
 export default Slug;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps({query,req,res}) {
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
+
     const {data: categories} = await getCategories();
-    const {data: products} = await getProductsData(ctx.query);
+    const {data: products} = await getProductsData(query.id);
     //const {data: attributes} = await getAttributes();
 
     // const myArr = []
@@ -118,7 +123,7 @@ export async function getServerSideProps(ctx) {
         props: {
             categories: categories ?? {},
             products: products ?? {},
-            currentCategoryId: ctx.query.id ?? null,
+            currentCategoryId: query.id ?? null,
             // attributes: attributes ?? {},
             // terms: myArr
         }
