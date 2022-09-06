@@ -96,11 +96,6 @@ const Slug = ({products, categories, currentCategoryId}) => {
 export default Slug;
 
 export async function getServerSideProps({query,req,res}) {
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
-    )
-
     const {data: categories} = await getCategories();
     const {data: products} = await getProductsData(query.id);
     //const {data: attributes} = await getAttributes();
